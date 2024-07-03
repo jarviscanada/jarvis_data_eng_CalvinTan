@@ -31,7 +31,7 @@ case $cmd in
 
   start|stop)
   # Check instance status
-  if [ $container_status -ne 0 ]; then
+  if [ "$container_status" -ne 0 ]; then
     echo 'Container does not exist'
     exit 1
   fi
