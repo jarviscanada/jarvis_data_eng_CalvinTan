@@ -72,6 +72,12 @@ FROM cd.members m
 		ON m.memid=r.recommendedby
 ORDER BY m.surname ASC, m.firstname ASC;
 
+SELECT m.firstname || ' ' || m.surname AS member, (
+	SELECT r.firstname || ' ' || r.surname AS recommender
+	FROM cd.members r
+	WHERE r.memid = m.recommendedby)
+FROM cd.members m 
+ORDER BY member;
 -- Aggregation
 SELECT m.recommendedby, count(*) AS count
 FROM cd.members m
@@ -85,7 +91,6 @@ FROM cd.facilities f
 		USING(facid)
 GROUP BY f.facid 
 ORDER BY f.facid ASC;
-
 
 SELECT f.facid, SUM(b.slots) AS "Total Slots"
 FROM cd.facilities f 
@@ -123,6 +128,12 @@ FROM cd.members m;
 SELECT ROW_NUMBER() OVER(ORDER BY m.joindate ASC), m.firstname, m.surname 
 FROM cd.members m ;
 
+
+SELECT facid, SUM(slots) AS total
+FROM cd.bookings b 
+GROUP BY b.facid
+ORDER BY total DESC
+LIMIT 1;
 -- String
 SELECT (m.surname || ', ' || m.firstname) AS name
 FROM cd.members m;
