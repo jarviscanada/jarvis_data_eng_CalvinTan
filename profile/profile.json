@@ -5,7 +5,7 @@
         "GPA: 3.7/4.0"
       ],
       "degree": "Bachelor of Science with Honours",
-      "department": "Electrical and Computer Engineering",
+      "department": "Electrical Engineering and Computer Science",
       "duration": "2019-2023",
       "school_name": "York University"
     }
@@ -13,11 +13,11 @@
   "github_repo_root_url": "https://github.com/jarviscanada/jarvis_data_eng_CalvinTan",
   "highlighted_projects": [
     {
-      "description": "Scans all 65,535 ports of a given IP address and returns the open ports. Each port is scanned on a different thread to execute the heavily I/O bound process in parallel.",
+      "description": "Built a tool in Java that is capable of scanning for open ports from a given IP address. Utilizing Java's multithreading feature, up to 10,000 ports in parallel for highly optimized performance. Implements a REST API using Spring Boot to allow the tool to be accessed from any web browser.",
       "name": "Port Scanner"
     },
     {
-      "description": "Implements a Windows System Tray Tool that assists with the regulation of the current power plan of the PC. This application executes batch files to execute CMD commands to access power plan controls.",
+      "description": "Designed and implemented a system tray tool to allow users to easily swap between different power plans on a Windows device. The tool executes batch files to access the PC's power plan controls. A GUI built using Windows Forms allows users to see the current power plan at a glance and change it through the system tray icon.",
       "name": "Windows Power Plan Tool"
     }
   ],
@@ -32,15 +32,15 @@
   "others": [
     {
       "bullets": [
-        "Microsoft Azure AI Fundamentals"
+        "Have the Microsoft Azure AI Fundamentals certificate"
       ],
       "title": "Certificates"
     },
     {
       "bullets": [
-        "Running",
-        "Cooking",
-        "Cooperative video games"
+        "Running: Recently started getting into running around May 2024. Currently able to run 5k in about 32 minutes, aiming to run 10k in under an hour by the end of 2024",
+        "Cooking: Capable of cooking a wide variety of simple dishes including kimchi rice, lasagna, takoyaki, spaghetti carbonara and many more",
+        "Video Games: A big fan of all genres of games with a preference for rpgs and coop games. Used to play League of Legends, Lost Ark, Darktide. Currently playing Deep Rock Galactic, Divinity 2, Risk of Rain 2"
       ],
       "title": "Activities/Hobbies"
     }
@@ -48,13 +48,13 @@
   "professional_experience": [
     {
       "company": "Jarvis",
-      "description": "Developed a cluster management solution for the Linux Cluster Administration team utlizing bash scripts, Docker, and PostgreSQL. Designed, created, and maintained an efficient and robust database",
+      "description": "Developed a cluster management solution for the Linux Cluster Administration team utilizing bash scripts, Docker, and PostgreSQL. Designed, created, and maintained an efficient and robust database",
       "duration": "2020-present",
       "title": "Software Developer"
     },
     {
       "company": "York University",
-      "description": "Organised and facilitaded two 90 minute study sessions to assit students with difficulties in PHYS1800 (Engineering Mechanics). Prior to each session, lectures would be attended to keep up with the specific material students were learning. Learning material would then be produced based on the lecture content to be tackled as a group during PASS sessions. Before midterms and finals, mock test and exams were hosted to help students feel more prepared.",
+      "description": "Organized and facilitated two 90 minute study sessions to assist students with difficulties in PHYS1800 (Engineering Mechanics). Prior to each session, lectures would be attended to keep up with the specific material students were learning. Learning material would then be produced based on the lecture content to be tackled as a group during PASS sessions. Before midterms and finals, mock tests and exams were hosted to help students feel more prepared.",
       "duration": "2020",
       "title": "PASS Leader"
     }
@@ -79,8 +79,8 @@
       "Python",
       "NodeJS",
       "RDBMS/SQL",
-      "Agile/Scrum"
+      "Agile/Scrumthat"
     ]
   },
-  "summary": "A recent graduate with a Specialized Honours BSc. Computer Science from York University. With a deep passion for software development, I am always looking to learn more and further improve my skills. I am a team player who can also get things done independently."
+  "summary": "I am a dedicated and results driven software developer who is always looking to learn more and use my skills to build real world solutions. Having graduated from York University with a first class degree in computer science, I am now looking for opportunities to apply my theoretical knowledge to create practical software solutions. Through my academic journey and personal projects, I have equipped myself with a wide array of software tools. I am skilled in Java, Python, REST APIs, SQL, with experience in React and NodeJS. I am currently working at Jarvis where I am utilizing technologies including Docker, Java, SQL, and many more on a wide array of projects. My current position has also provided me with experience working under the Scrum/Agile framework. I believe my skillset allows me to excel in any development environment."
 }
