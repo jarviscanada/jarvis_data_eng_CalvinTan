@@ -1,0 +1,113 @@
+# Preferred name (Characters only)
+name: "Calvin Tan"
+# Your GitHub repo root URL
+github_repo_root_url: https://github.com/jarviscanada/jarvis_data_eng_CalvinTan
+
+# Introduce yourself, your academic and professional background.
+# What excites you about the software industry and your passion. At least 80 words
+summary: A recent graduate with a Specialized Honours BSc. Computer Science from York University. With a deep passion for software development, I am always looking to learn more and further improve my skills. I am a team player who can also get things done independently.
+
+# Group your skills by level.
+# Your skills can be anything software related (e.g. language, frameworks, methodologies, software, etc.).
+skills:
+  # At least 5 skills
+  proficient:
+    - Java 
+    - Python
+    - NodeJS
+    - RDBMS/SQL
+    - Agile/Scrum
+  # At least 5 skills
+  competent:
+    - JavaScript
+    - REST API
+    - Linux/Bash
+    - Machine Learning
+    - Express.js
+  # At least 5 skills
+  familiar:
+    - SpringBoot
+    - React
+    - Machine Learning
+    - C#
+    - Unity
+
+# List of Jarvis projects
+jarvis_projects:
+  - name: "Cluster Monitor"
+    git_url: "/linux_sql"
+    # The project description allows hiring managers to understand your project and technologies you used(e.g. programming languages, libraries, algorithms, hardware, tools, etc.).
+    # The project description must start with an action verb (https://bit.ly/3guO98u)
+    description: This project implements a few utilities designed to help the Jarvis Cluster Administration (LCA) team collect system specifications as well as resource usage from each node running on their Linux cluster. The LCA team would use this information for real-time resource monitoring as well as planning how to allocate these resources in the future. The specifications and usage statistics are collected using bash scripts and stored in a PostgreSQL database which runs in a Docker container. Usage statistics are gathered every minute and inserted into the database with timestamps.
+  # - name: "Core Java Apps"
+  #   git_url: "/core_java"
+  #   description:
+  #     - "Twitter App: Curabitur laoreet tristique leo, eget suscipit nisi. Sed in sodales ex. Maecenas vitae tincidunt dui, et eleifend quam."
+  #     - "JDBC App: Curabitur laoreet tristique leo, eget suscipit nisi. Sed in sodales ex. Maecenas vitae tincidunt dui, et eleifend quam."
+  #     - "Grep App: Curabitur laoreet tristique leo, eget suscipit nisi. Sed in sodales ex. Maecenas vitae tincidunt dui, et eleifend quam."
+  # - name: "Springboot App"
+  #   git_url: "/springboot"
+  #   description: ""
+  # - name: "Python Data Analytics"
+  #   git_url: "/python_data_anlytics"
+  #   description: ""
+  # - name: "Hadoop"
+  #   git_url: "/hadoop"
+  #   description: ""
+  # - name: "Spark"
+  #   git_url: "/spark"
+  #   description: ""
+  # - name: "Cloud/DevOps"
+  #   git_url: "/cloud_devops"
+  #   description: ""
+
+# List of personal or academic projects
+# Feel free to add more projects
+highlighted_projects:
+    #project name
+  - name: "Port Scanner"
+    #URL is optional
+    # The project description must start with an action verb (https://bit.ly/3guO98u)
+    description: Scans all 65,535 ports of a given IP address and returns the open ports. Each port is scanned on a different thread to execute the heavily I/O bound process in parallel.
+
+  - name: "Windows Power Plan Tool"
+    description: Implements a Windows System Tray Tool that assists with the regulation of the current power plan of the PC. This application executes batch files to execute CMD commands to access power plan controls.
+
+#List of professional experience
+#The job description allows hiring managers to understand your job and the technologies you used(e.g. programming languages, libraries, algorithms, hardware, tools, etc.).
+#The description must be more than 25 words. If your experience is not software related, please focus on soft skills and achievements (e.g. team collaboration, problem-solving, improvements, communication).
+professional_experience:
+  #Write your Jarvis role as a professional experience rather than training.
+  - title: "Software Developer"
+    company: "Jarvis"
+    duration: "2020-present"
+    # The project description must start with an action verb (https://bit.ly/3guO98u)
+    description: "Developed a cluster management solution for the Linux Cluster Administration team utlizing bash scripts, Docker, and PostgreSQL. Designed, created, and maintained an efficient and robust database"
+  - title: "PASS Leader"
+    company: "York University"
+    duration: "2020"
+    description: "Organised and facilitaded two 90 minute study sessions to assit students with difficulties in PHYS1800 (Engineering Mechanics). Prior to each session, lectures would be attended to keep up with the specific material students were learning. Learning material would then be produced based on the lecture content to be tackled as a group during PASS sessions. Before midterms and finals, mock test and exams were hosted to help students feel more prepared."
+
+#List of edcuation
+education: 
+  - school_name: "York University"
+    duration: "2019-2023"
+    degree: "Bachelor of Science with Honours"
+    department: "Electrical and Computer Engineering"
+    # optional
+    awards_achievements: 
+      - "GPA: 3.7/4.0"
+
+#Optional section
+others:
+    #category
+  - title: "Certificates"
+    #list of items
+    bullets:
+      - "Microsoft Azure AI Fundamentals"
+  - title: "Activities/Hobbies"
+    bullets:
+      - "Running"
+      - "Cooking"
+      - "Cooperative video games"
+
