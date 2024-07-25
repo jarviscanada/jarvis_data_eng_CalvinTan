@@ -5,15 +5,13 @@ import org.apache.log4j.BasicConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
-import java.io.File;
-import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -30,7 +28,7 @@ public class JavaGrepImp implements JavaGrep {
     private Pattern pattern;
     private Matcher matcher;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         if (args.length != 3) {
             //throw new IllegalArgumentException("USAGE: JavaGrep regex rootPath outFile");
         }
@@ -61,20 +59,34 @@ public class JavaGrepImp implements JavaGrep {
     }
 
     @Override
-    public List<File> listFiles(String rootDir) throws IOException {
-        List<File> files = new ArrayList<File>();
+    public List<File> listFiles(String rootDir) {
+        List<File> files = new ArrayList<>();
         try {
             Stream<Path> pathStream = Files.list(Paths.get(this.rootPath));
             files = pathStream.map(Path::toFile).filter(File::isFile).collect(Collectors.toList());
         } catch (IOException e) {
-            this.logger.error("Error: Unable to list Files", e);
+            this.logger.error("Error: Unable to list files", e);
         }
         return files;
     }
 
     @Override
     public List<String> readLines(File inputFile) {
-        return Collections.emptyList();
+        List<String> lines = new ArrayList<>();
+        BufferedReader reader;
+        try {
+            reader = new BufferedReader(new FileReader(inputFile));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                lines.add(line);
+            }
+            reader.close();
+        } catch (FileNotFoundException e) {
+            this.logger.error("Error: File not found", e);
+        } catch (IOException e) {
+            this.logger.error("Error: IOException", e);
+        }
+        return lines;
     }
 
     @Override
@@ -86,7 +98,17 @@ public class JavaGrepImp implements JavaGrep {
 
     @Override
     public void writeToFile(List<String> lines) throws IOException {
-
+        BufferedWriter writer;
+        try {
+            writer = new BufferedWriter(new FileWriter("out\\test.txt"));
+            for (String line : lines) {
+                writer.write(line);
+                writer.newLine();
+            }
+            writer.close();
+        } catch (IOException e) {
+            this.logger.error("Error: Failed to write to file", e);
+        }
     }
 
     @Override
