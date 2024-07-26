@@ -47,6 +47,10 @@ public class JavaGrepImp implements JavaGrep {
         }
     }
 
+    /**
+     * Top level search workflow
+     * @throws IOException
+     */
     @Override
     public void process() throws IOException {
         List<String> matchedLines = new ArrayList<String>();
@@ -58,6 +62,11 @@ public class JavaGrepImp implements JavaGrep {
         writeToFile(matchedLines);
     }
 
+    /**
+     * Traverse a given directory and return all files
+     * @param rootDir input directory
+     * @return files under the rootDir
+     */
     @Override
     public List<File> listFiles(String rootDir) {
         List<File> files = new ArrayList<>();
@@ -70,8 +79,15 @@ public class JavaGrepImp implements JavaGrep {
         return files;
     }
 
+    /**
+     * Read a file and return all lines
+     * @param inputFile file to read
+     * @return lines
+     * @throws IllegalArgumentException inputFile is not a file
+     */
     @Override
-    public List<String> readLines(File inputFile) {
+    public List<String> readLines(File inputFile) throws IllegalArgumentException {
+        if (!inputFile.isFile()) throw new IllegalArgumentException();
         List<String> lines = new ArrayList<>();
         BufferedReader reader;
         try {
@@ -89,6 +105,11 @@ public class JavaGrepImp implements JavaGrep {
         return lines;
     }
 
+    /**
+     * Check if a line contains the regex pattern (passed by user)
+     * @param line input string
+     * @return true if there is a match
+     */
     @Override
     public boolean containsPattern(String line) {
         pattern = Pattern.compile(this.regex);
@@ -96,19 +117,20 @@ public class JavaGrepImp implements JavaGrep {
         return matcher.find();
     }
 
+    /**
+     * Write lines to a file
+     * @param lines lines to write
+     * @throws IOException if write failed
+     */
     @Override
     public void writeToFile(List<String> lines) throws IOException {
         BufferedWriter writer;
-        try {
-            writer = new BufferedWriter(new FileWriter("out\\" + this.outFile));
-            for (String line : lines) {
-                writer.write(line);
-                writer.newLine();
-            }
-            writer.close();
-        } catch (IOException e) {
-            this.logger.error("Error: Failed to write to file", e);
+        writer = new BufferedWriter(new FileWriter("out\\" + this.outFile));
+        for (String line : lines) {
+            writer.write(line);
+            writer.newLine();
         }
+        writer.close();
     }
 
     @Override
