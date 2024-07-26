@@ -100,7 +100,7 @@ public class JavaGrepImp implements JavaGrep {
     public void writeToFile(List<String> lines) throws IOException {
         BufferedWriter writer;
         try {
-            writer = new BufferedWriter(new FileWriter("out\\test.txt"));
+            writer = new BufferedWriter(new FileWriter("out\\" + this.outFile));
             for (String line : lines) {
                 writer.write(line);
                 writer.newLine();
