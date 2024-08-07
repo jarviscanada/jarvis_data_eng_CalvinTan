@@ -68,7 +68,7 @@ public class JavaGrepLambdaImp implements JavaGrepLambda{
     @Override
     public Stream<File> listFiles(String rootDir) {
         try {
-            return Files.list(Paths.get(rootDir)).map(Path::toFile).filter(File::isFile);
+            return Files.walk(Paths.get(rootDir)).map(Path::toFile).filter(File::isFile);
         } catch (IOException e) {
             this.logger.error("Error: Failed to list files", e);
         }

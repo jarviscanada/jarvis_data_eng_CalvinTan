@@ -7,3 +7,5 @@ target/
 *.iml
 .idea/
 .eclipse
+core_java/grep/src/test/java/ca/jrvs/apps/Test.java
+/core_java/grep/out
