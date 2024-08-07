@@ -24,7 +24,7 @@ public class JavaGrepImpTest {
     @Test
     public void listFilesDataTxt() throws IOException {
         grep.setRootPath("data\\txt");
-        List<File> tempFiles = grep.listFiles(grep.getOutFile());
+        List<File> tempFiles = grep.listFiles(grep.getRootPath());
         assertTrue(!tempFiles.isEmpty());
         assertEquals("shakespeare.txt", tempFiles.get(0).getName());
     }

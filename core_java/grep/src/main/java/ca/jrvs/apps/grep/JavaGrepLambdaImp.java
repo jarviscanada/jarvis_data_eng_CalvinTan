@@ -16,12 +16,17 @@ import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 public class JavaGrepLambdaImp implements JavaGrepLambda{
+    enum OS {
+        WINDOWS,
+        LINUX
+    }
 
     final Logger logger = LoggerFactory.getLogger(JavaGrep.class);
 
     private String regex;
     private String rootPath;
     private String outFile;
+    private OS os;
 
     public static void main(String[] args) {
         if (args.length != 3) {
@@ -30,7 +35,7 @@ public class JavaGrepLambdaImp implements JavaGrepLambda{
 
         BasicConfigurator.configure();
         JavaGrepLambdaImp grep = new JavaGrepLambdaImp();
-
+        grep.os = System.getProperty("os.name").toLowerCase().contains("windows") ? OS.WINDOWS : OS.LINUX;
         grep.setRegex(args[0]);
         grep.setRootPath(args[1]);
         grep.setOutFile(args[2]);
@@ -55,22 +60,35 @@ public class JavaGrepLambdaImp implements JavaGrepLambda{
         writeToFile(matchedLines);
     }
 
+    /**
+     * Traverse a given directory and return all files
+     * @param rootDir input directory
+     * @return files under the rootDir
+     */
     @Override
     public Stream<File> listFiles(String rootDir) {
         try {
             return Files.list(Paths.get(rootDir)).map(Path::toFile).filter(File::isFile);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            this.logger.error("Error: Failed to list files", e);
         }
+        return null;
     }
 
+    /**
+     * Read a file and return all lines
+     * @param inputFile file to read
+     * @return lines
+     * @throws IllegalArgumentException inputFile is not a file
+     */
     @Override
     public Stream<String> readLines(File inputFile) {
         try {
             return Files.lines(inputFile.toPath());
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            this.logger.error("Error: Failed to read lines", e);
         }
+        return null;
     }
 
     /**
@@ -93,16 +111,21 @@ public class JavaGrepLambdaImp implements JavaGrepLambda{
     @Override
     public void writeToFile(Stream<String> lines) throws IOException {
         BufferedWriter writer;
-        writer = new BufferedWriter(new FileWriter("out\\" + this.outFile));
+        writer = new BufferedWriter(new FileWriter(this.outFile));
         lines.forEach(line -> {
             try {
                 writer.write(line);
                 writer.newLine();
             } catch (IOException e) {
-
+                this.logger.error("Error: Failed to write file", e);
             }
         });
         writer.close();
+    }
+
+    private String convertPath(String path) {
+        path = this.os == OS.WINDOWS ? path.replace("/", "\\\\") : path;
+        return path;
     }
 
     @Override
@@ -112,7 +135,7 @@ public class JavaGrepLambdaImp implements JavaGrepLambda{
 
     @Override
     public void setRootPath(String rootPath) {
-        this.rootPath = rootPath;
+        this.rootPath = convertPath(rootPath);
     }
 
     @Override
@@ -132,7 +155,7 @@ public class JavaGrepLambdaImp implements JavaGrepLambda{
 
     @Override
     public void setOutFile(String outFile) {
-        this.outFile = outFile;
+        this.outFile = convertPath(outFile);
     }
 }
 

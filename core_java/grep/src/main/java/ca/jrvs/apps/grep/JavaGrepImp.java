@@ -25,12 +25,9 @@ public class JavaGrepImp implements JavaGrep {
     private String rootPath;
     private String outFile;
 
-    private Pattern pattern;
-    private Matcher matcher;
-
     public static void main(String[] args) {
         if (args.length != 3) {
-            //throw new IllegalArgumentException("USAGE: JavaGrep regex rootPath outFile");
+            throw new IllegalArgumentException("USAGE: JavaGrep regex rootPath outFile");
         }
 
         BasicConfigurator.configure();
@@ -112,8 +109,8 @@ public class JavaGrepImp implements JavaGrep {
      */
     @Override
     public boolean containsPattern(String line) {
-        pattern = Pattern.compile(this.regex);
-        matcher = pattern.matcher(line);
+        Pattern pattern = Pattern.compile(this.regex);
+        Matcher matcher = pattern.matcher(line);
         return matcher.find();
     }
 

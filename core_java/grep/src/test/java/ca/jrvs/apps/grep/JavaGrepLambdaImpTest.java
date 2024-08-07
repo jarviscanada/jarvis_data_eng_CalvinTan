@@ -56,7 +56,7 @@ public class JavaGrepLambdaImpTest {
 
     @Test
     public void testMain() {
-        String[] inputs = new String[]{".*Romeo.*Juliet.*", "data\\txt", "grep.out"};
+        String[] inputs = new String[]{".*Romeo.*Juliet.*", "data/txt", "out/grep.out"};
         JavaGrepLambdaImp.main(inputs);
     }
 
