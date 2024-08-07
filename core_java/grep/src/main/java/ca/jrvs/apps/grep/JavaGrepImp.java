@@ -1,6 +1,5 @@
 package ca.jrvs.apps.grep;
 
-import com.sun.istack.internal.NotNull;
 import org.apache.log4j.BasicConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,7 +67,7 @@ public class JavaGrepImp implements JavaGrep {
     public List<File> listFiles(String rootDir) {
         List<File> files = new ArrayList<>();
         try {
-            Stream<Path> pathStream = Files.list(Paths.get(this.rootPath));
+            Stream<Path> pathStream = Files.walk(Paths.get(this.rootPath));
             files = pathStream.map(Path::toFile).filter(File::isFile).collect(Collectors.toList());
         } catch (IOException e) {
             this.logger.error("Error: Unable to list files", e);
@@ -122,7 +121,7 @@ public class JavaGrepImp implements JavaGrep {
     @Override
     public void writeToFile(List<String> lines) throws IOException {
         BufferedWriter writer;
-        writer = new BufferedWriter(new FileWriter("out\\" + this.outFile));
+        writer = new BufferedWriter(new FileWriter(this.outFile));
         for (String line : lines) {
             writer.write(line);
             writer.newLine();

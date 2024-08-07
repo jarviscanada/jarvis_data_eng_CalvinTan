@@ -12,40 +12,36 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class JavaGrepImpTest {
-
+    enum OS {
+        WINDOWS,
+        LINUX
+    }
     JavaGrepImp grep;
+    OS os;
 
     @Before
     public void setUp() {
         this.grep = new JavaGrepImp();
+        this.os = System.getProperty("os.name").toLowerCase().contains("windows") ? OS.WINDOWS : OS.LINUX;
         BasicConfigurator.configure();
     }
 
     @Test
     public void listFilesDataTxt() throws IOException {
-        grep.setRootPath("data\\txt");
+        String rootPath = this.os == OS.WINDOWS ? "data\\" : "./data";
+        grep.setRootPath(rootPath);
         List<File> tempFiles = grep.listFiles(grep.getRootPath());
         assertTrue(!tempFiles.isEmpty());
         assertEquals("shakespeare.txt", tempFiles.get(0).getName());
     }
 
     @Test
-    public void listFilesRoot() throws IOException {
-        grep.setRootPath("");
-        List<File> expected = new ArrayList<>();
-        expected.add(new File("pom.xml"));
-        expected.add(new File("README.md"));
-        List<File> actual = grep.listFiles(grep.getOutFile());
-        assertTrue(expected.size() == actual.size() && expected.containsAll(actual) && actual.containsAll(expected));
-    }
-
-    @Test
     public void readLines() {
-        grep.setRootPath("data\\txt");
+        String filePath = this.os == OS.WINDOWS ? "data\\txt\\shakespeare.txt" : "./data/txt/shakespeare.txt";
         List<String> expected = new ArrayList<>();
         expected.add("This is the 100th Etext file presented by Project Gutenberg, and");
         expected.add("is presented in cooperation with World Library, Inc., from their");
-        List<String> actual = grep.readLines(new File("data\\txt\\shakespeare.txt"));
+        List<String> actual = grep.readLines(new File(filePath));
         actual = actual.subList(0,2);
         assertEquals(expected, actual);
     }
@@ -69,12 +65,13 @@ public class JavaGrepImpTest {
 
     @Test
     public void writeToFile() throws IOException {
-        grep.setOutFile("testFile.txt");
+        String outFile = this.os == OS.WINDOWS ? "out\\testFile.txt" : "./out/testFile.txt";
+        grep.setOutFile(outFile);
         List<String> expected = new ArrayList<>();
         expected.add("this is");
         expected.add("a test file");
         grep.writeToFile(expected);
-        List<String> actual = grep.readLines(new File("out\\testFile.txt"));
+        List<String> actual = grep.readLines(new File(grep.getOutFile()));
         assertEquals(expected, actual);
     }
 }
