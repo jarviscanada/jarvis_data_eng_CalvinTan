@@ -15,19 +15,21 @@ skills:
     - Python
     - NodeJS
     - RDBMS/SQL
-    - Agile/Scrumthat
+    - Agile/Scrum
   # At least 5 skills
   competent:
     - JavaScript
-    - REST API
+    - Docker
+    - Socket.IO
+    - Maven
     - Linux/Bash
-    - Machine Learning
+    - Pandas
     - Express.js
   # At least 5 skills
   familiar:
     - SpringBoot
     - React
-    - Machine Learning
+    - Scikit-learn
     - C#
     - Unity
 
@@ -84,7 +86,7 @@ professional_experience:
   - title: "PASS Leader"
     company: "York University"
     duration: "2020"
-    description: "Organized and facilitated two 90 minute study sessions to assist students with difficulties in PHYS1800 (Engineering Mechanics). Prior to each session, lectures would be attended to keep up with the specific material students were learning. Learning material would then be produced based on the lecture content to be tackled as a group during PASS sessions. Before midterms and finals, mock tests and exams were hosted to help students feel more prepared."
+    description: "Organized and facilitated two 90 minute study sessions weekly to assist students with difficulties in PHYS1800 (Engineering Mechanics). Prior to each session, lectures would be attended to keep up with the specific material students were learning. Learning material would then be produced based on the lecture content to be tackled as a group during PASS sessions. Before midterms and finals, mock tests and exams were hosted to help students feel more prepared."
 
 #List of edcuation
 education: 
@@ -106,6 +108,6 @@ others:
   - title: "Activities/Hobbies"
     bullets:
       - "Running: Recently started getting into running around May 2024. Currently able to run 5k in about 32 minutes, aiming to run 10k in under an hour by the end of 2024"
-      - "Cooking: Capable of cooking a wide variety of simple dishes including kimchi rice, lasagna, takoyaki, spaghetti carbonara and many more"
-      - "Video Games: A big fan of all genres of games with a preference for rpgs and coop games. Used to play League of Legends, Lost Ark, Darktide. Currently playing Deep Rock Galactic, Divinity 2, Risk of Rain 2"
+      - "Cooking: Capable of cooking a wide variety of tasty dishes including kimchi rice, lasagna, takoyaki, spaghetti carbonara and many more"
+      - "Video Games: A big fan of all genres of games with a preference for rpgs and coop games where we work as a team to take on a shared objective. Used to play League of Legends, Lost Ark. Currently playing Deep Rock Galactic, Divinity 2, Risk of Rain 2"
 
