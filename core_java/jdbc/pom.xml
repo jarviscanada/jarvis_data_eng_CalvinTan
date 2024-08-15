@@ -1,0 +1,31 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>ca.jrvs.apps</groupId>
+    <artifactId>jdbc</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <org.slf4j.version>2.0.13</org.slf4j.version>
+        <org.prostgresql.version>42.2.5</org.prostgresql.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${org.slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${org.prostgresql.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+
+    </build>
+</project>
