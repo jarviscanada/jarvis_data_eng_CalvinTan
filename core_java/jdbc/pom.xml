@@ -10,6 +10,7 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <org.slf4j.version>2.0.13</org.slf4j.version>
         <org.prostgresql.version>42.2.5</org.prostgresql.version>
+        <com.fasterxml.jackson.core.version>2.16.1</com.fasterxml.jackson.core.version>
     </properties>
 
     <dependencies>
@@ -23,9 +24,24 @@
             <artifactId>postgresql</artifactId>
             <version>${org.prostgresql.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${com.fasterxml.jackson.core.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
 
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 </project>
