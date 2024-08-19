@@ -11,6 +11,7 @@
         <org.slf4j.version>2.0.13</org.slf4j.version>
         <org.prostgresql.version>42.2.5</org.prostgresql.version>
         <com.fasterxml.jackson.core.version>2.16.1</com.fasterxml.jackson.core.version>
+        <com.squareup.okhtttp3.version>5.0.0-alpha.11</com.squareup.okhtttp3.version>
     </properties>
 
     <dependencies>
@@ -29,8 +30,12 @@
             <artifactId>jackson-databind</artifactId>
             <version>${com.fasterxml.jackson.core.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>${com.squareup.okhtttp3.version}</version>
+        </dependency>
     </dependencies>
-
     <build>
 
         <plugins>
