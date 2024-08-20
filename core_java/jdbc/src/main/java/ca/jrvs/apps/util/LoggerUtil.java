@@ -1,4 +1,4 @@
-package ca.jrvs.apps.jdbc.exercises;
+package ca.jrvs.apps.util;
 
 import org.apache.log4j.BasicConfigurator;
 import org.slf4j.Logger;

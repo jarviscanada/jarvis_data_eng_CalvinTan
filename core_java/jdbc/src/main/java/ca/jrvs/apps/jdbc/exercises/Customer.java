@@ -1,7 +1,5 @@
 package ca.jrvs.apps.jdbc.exercises;
 
-import ca.jrvs.apps.jdbc.exercises.util.DatabaseTransferObject;
-
 public class Customer implements DatabaseTransferObject {
 
     private long id;

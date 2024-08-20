@@ -1,4 +1,4 @@
-package ca.jrvs.apps.jdbc.exercises.util;
+package ca.jrvs.apps.jdbc.exercises;
 
 import java.sql.Connection;
 import java.util.List;
