@@ -1,12 +1,12 @@
 package ca.jrvs.apps.stockquote.dao;
 
-import ca.jrvs.apps.jdbc.exercises.LoggerUtil;
-import ca.jrvs.apps.jdbc.exercises.api.AlphaVantageAPI;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import okhttp3.HttpUrl;
+import ca.jrvs.apps.stockquote.api.AlphaVantageAPI;
+import ca.jrvs.apps.stockquote.json.JsonParser;
+import ca.jrvs.apps.util.LoggerUtil;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.Response;
 import org.slf4j.Logger;
 
@@ -30,7 +30,12 @@ public class QuotteHttpHelper {
 
     public static void main(String[] args) {
         QuotteHttpHelper obj = new QuotteHttpHelper();
-        obj.fetchQuoteInfo("MSFT");
+        try {
+            Quote quote = obj.fetchQuoteInfo("MSFT");
+            logger.debug(quote.getSymbol() + ": " + quote.getPrice());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -39,35 +44,18 @@ public class QuotteHttpHelper {
      * @return quote data
      * @throws IllegalArgumentException no data was found for given symbol
      */
-    public Quote fetchQuoteInfo(String symbol) {
-        Request request = this.buildRequest(symbol);
-        try {
-            Response response = this.client.newCall(request).execute();
-            logger.debug(response.body().string());
-        } catch (IOException e) {
-            logger.error("ERROR: client call failed");
-        }
-        return null;
-    }
-
-    private Request buildRequest(String symbol) {
-        HttpUrl url = HttpUrl.parse("https://alpha-vantage.p.rapidapi.com/query").newBuilder()
-                .addQueryParameter("function", "GLOBAL_QUOTE")
-                .addQueryParameter("symbol", symbol)
-                .addQueryParameter("datatype", "json")
-                .build();
-        return new Request.Builder()
-                .url(url)
-                .header("x-rapidapi-host", "alpha-vantage.p.rapidapi.com")
-                .header("x-rapidapi-key", this.apiKey)
-                .build();
+    public Quote fetchQuoteInfo(String symbol) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        Response response = AlphaVantageAPI.get(this.client, symbol, this.apiKey);
+        Quote quote = JsonParser.toObjectFromJson(response.body().string(), Quote.class);
+        return quote;
     }
 
     private void loadProperties() {
         try {
             this.properties.load(new FileInputStream("alpha_vantage.properties"));
         } catch (IOException e) {
-            logger.error("ERROR: failed to load properties");
+            logger.error("ERROR: failed to load or use api key");
         }
     }
 }
