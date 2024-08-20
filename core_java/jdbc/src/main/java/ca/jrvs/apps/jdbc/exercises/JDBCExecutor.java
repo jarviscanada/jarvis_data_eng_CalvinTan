@@ -1,5 +1,6 @@
 package ca.jrvs.apps.jdbc.exercises;
 
+import ca.jrvs.apps.util.DatabaseConnectionManager;
 import ca.jrvs.apps.util.LoggerUtil;
 
 import java.sql.Connection;
