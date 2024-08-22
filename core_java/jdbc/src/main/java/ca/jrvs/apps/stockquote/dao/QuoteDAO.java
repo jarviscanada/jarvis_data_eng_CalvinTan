@@ -28,7 +28,12 @@ public class QuoteDAO implements CrudDAO<Quote, ID> {
     private static final String SELECT_ALL = "SELECT * " +
             "FROM quote";
 
-    private static final String UPDATE = "SELECT "
+    private static final String UPDATE = "UPDATE quote SET " +
+            "open = ?, high = ?, low = ?, " +
+            "price = ?, volume = ?, latest_trading_day = ?, " +
+            "previous_close = ?, change = ?, change_percent = ?, " +
+            "timestamp = ? " +
+            "WHERE symbol = ?";
 
     private static final String DELETE = "DELETE FROM quote " +
             "WHERE id = ?";
@@ -116,7 +121,23 @@ public class QuoteDAO implements CrudDAO<Quote, ID> {
 
     @Override
     public Quote update(Quote dto) {
-        return null;
+        try (PreparedStatement statement = this.connection.prepareStatement(UPDATE)) {
+            statement.setDouble(1, dto.getOpen());
+            statement.setDouble(2, dto.getHigh());
+            statement.setDouble(3, dto.getLow());
+            statement.setDouble(4, dto.getPreviousClose());
+            statement.setInt(5, dto.getVolume());
+            statement.setDate(6, dto.getLatestTradingDay());
+            statement.setDouble(7, dto.getPreviousClose());
+            statement.setDouble(8, dto.getChange());
+            statement.setString(9, dto.getChangePercent());
+            statement.setTimestamp(10, dto.getTimestamp());
+            statement.setString(11, dto.getSymbol());
+            statement.execute();
+            return dto;
+        } catch (SQLException e) {
+            logger.error("ERROR: failed to insert new quote", e);
+        }
     }
 
     @Override

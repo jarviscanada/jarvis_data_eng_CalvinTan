@@ -26,6 +26,10 @@ public class PositionDAO implements CrudDAO<Position, ID> {
     private static final String SELECT_ALL = "SELECT * " +
             "FROM position";
 
+    private static final String UPDATE = "UPDATE position SET" +
+            "symbol = ?, number_of_shares = ?, value_paid = ? " +
+            "WHERE id = ?";
+
     private static final String DELETE = "DELETE FROM position " +
             "WHERE id = ?";
 
@@ -88,6 +92,16 @@ public class PositionDAO implements CrudDAO<Position, ID> {
 
     @Override
     public Position update(Position dto) {
+        try (PreparedStatement statement = this.connection.prepareStatement(UPDATE)) {
+            statement.setString(1, dto.getSymbol());
+            statement.setInt(2, dto.getNumOfShares());
+            statement.setDouble(3, dto.getValuePaid());
+            statement.setLong(4, dto.getId().getId());
+            statement.execute();
+            return dto;
+        } catch (SQLException e) {
+            logger.error("ERROR: failed to insert new quote", e);
+        }
         return null;
     }
 
