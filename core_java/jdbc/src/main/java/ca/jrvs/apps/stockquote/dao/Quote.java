@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 
 public class Quote {
 
+    private ID id;
     @JsonProperty("01. symbol")
     private String symbol;
     @JsonProperty("02. open")
@@ -28,6 +29,14 @@ public class Quote {
     @JsonProperty("10. change percent")
     private String changePercent;
     private Timestamp timestamp; //time when the info was pulled
+
+    public ID getId() {
+        return id;
+    }
+
+    public void setId(ID id) {
+        this.id = id;
+    }
 
     public String getSymbol() {
         return symbol;
