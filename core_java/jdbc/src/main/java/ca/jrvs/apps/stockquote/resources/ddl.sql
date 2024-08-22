@@ -7,7 +7,7 @@ CREATE SEQUENCE position_id START WITH 100;
 
 DROP TABLE IF EXISTS quote;
 CREATE TABLE PUBLIC.quote (
-    id                  INT NOT NULL DEFAULT nextval('quote_id'),
+    id                  INT UNIQUE NOT NULL DEFAULT nextval('quote_id'),
     symbol              VARCHAR(10) PRIMARY KEY,
     open                DECIMAL(10, 2) NOT NULL,
     high                DECIMAL(10, 2) NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE PUBLIC.quote (
 
 DROP TABLE IF EXISTS position;
 CREATE TABLE PUBLIC.position (
-    id                      INT NOT NULL DEFAULT nextval('position_id')
+    id                      INT UNIQUE NOT NULL DEFAULT nextval('position_id'),
     symbol                  VARCHAR(10) PRIMARY KEY,
     number_of_shares        INT NOT NULL,
     value_paid              DECIMAL(10, 2) NOT NULL,
