@@ -25,6 +25,10 @@ public class QuoteDAO implements CrudDAO<Quote, ID> {
             "FROM quote " +
             "WHERE id = ?";
 
+    private static final String SELECT_BY_SYMBOL = "SELECT * " +
+            "FROM quote " +
+            "WHERE symbol = ?";
+
     private static final String SELECT_ALL = "SELECT * " +
             "FROM quote";
 
@@ -68,6 +72,32 @@ public class QuoteDAO implements CrudDAO<Quote, ID> {
     public Quote findById(ID id) {
         try (PreparedStatement statement = this.connection.prepareStatement(SELECT_BY_ID)) {
             statement.setLong(1, id.getId());
+            ResultSet resultSet = statement.executeQuery();
+            Quote quote = new Quote();
+            while (resultSet.next()) {
+                quote.setId(new ID(resultSet.getInt("id")));
+                quote.setSymbol(resultSet.getString("symbol"));
+                quote.setOpen(resultSet.getDouble("open"));
+                quote.setHigh(resultSet.getDouble("high"));
+                quote.setLow(resultSet.getDouble("low"));
+                quote.setPrice(resultSet.getDouble("price"));
+                quote.setVolume(resultSet.getInt("volume"));
+                quote.setLatestTradingDay(resultSet.getDate("latest_trading_day"));
+                quote.setPreviousClose(resultSet.getDouble("previous_close"));
+                quote.setChange(resultSet.getDouble("change"));
+                quote.setChangePercent(resultSet.getString("change_percent"));
+                quote.setTimestamp(resultSet.getTimestamp("timestamp"));
+            }
+            return quote;
+        } catch (SQLException e) {
+            logger.error("ERROR: failed to find quote by id", e);
+        }
+        return null;
+    }
+
+    public Quote findBySymbol(String symbol) {
+        try (PreparedStatement statement = this.connection.prepareStatement(SELECT_BY_SYMBOL)) {
+            statement.setString(1, symbol);
             ResultSet resultSet = statement.executeQuery();
             Quote quote = new Quote();
             while (resultSet.next()) {
@@ -138,6 +168,7 @@ public class QuoteDAO implements CrudDAO<Quote, ID> {
         } catch (SQLException e) {
             logger.error("ERROR: failed to insert new quote", e);
         }
+        return null;
     }
 
     @Override
