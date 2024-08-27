@@ -69,17 +69,17 @@ public class PositionService {
 
     private void logBuy(Position position) {
         StringBuilder buyLog = new StringBuilder();
-        buyLog.append(position.getSymbol() + " Bought successfully")
-                .append("total shares: " + position.getNumOfShares())
-                .append("total amount paid: " + position.getValuePaid());
+        buyLog.append(position.getSymbol() + " Bought successfully\n")
+                .append("total shares: " + position.getNumOfShares() + "\n")
+                .append("total amount paid: " + position.getValuePaid() + "\n");
         logger.info(String.valueOf(buyLog));
     }
 
     private void logSell(Quote quote, Position position) {
         StringBuilder sellLog = new StringBuilder();
-        sellLog.append(position.getSymbol() + " Sold successfully")
-                .append("sell price: " + quote.getPrice())
-                .append("profit/loss: " + (quote.getPrice()*position.getNumOfShares() - position.getValuePaid()));
+        sellLog.append(position.getSymbol() + " Sold successfully\n")
+                .append("sell price: " + quote.getPrice() + "\n")
+                .append("profit/loss: " + (quote.getPrice()*position.getNumOfShares() - position.getValuePaid()) + "\n");
         logger.info(String.valueOf(sellLog));
     }
 

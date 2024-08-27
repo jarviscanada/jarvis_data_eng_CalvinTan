@@ -3,6 +3,7 @@ package ca.jrvs.apps.stockquote.service;
 import ca.jrvs.apps.stockquote.dao.Quote;
 import ca.jrvs.apps.stockquote.dao.QuoteDAO;
 import ca.jrvs.apps.stockquote.dao.QuoteHttpHelper;
+import ca.jrvs.apps.stockquote.dao.SymbolNotFoundException;
 import ca.jrvs.apps.util.LoggerUtil;
 import org.slf4j.Logger;
 
@@ -34,7 +35,7 @@ public class QuoteService {
         try {
             Quote quote = this.httpHelper.fetchQuoteInfo(symbol);
             return Optional.of(quote);
-        } catch (IOException e) {
+        } catch (IOException | SymbolNotFoundException e) {
             return Optional.empty();
         }
     }

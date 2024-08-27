@@ -34,9 +34,10 @@ public class QuoteHttpHelper {
      * @return quote data
      * @throws IllegalArgumentException no data was found for given symbol
      */
-    public Quote fetchQuoteInfo(String symbol) throws IOException {
+    public Quote fetchQuoteInfo(String symbol) throws IOException, SymbolNotFoundException {
         Response response = AlphaVantageAPI.get(this.client, symbol, this.apiKey);
         Quote quote = JsonParser.toObjectFromJson(response.body().string(), Quote.class);
+        if (quote == null || quote.getSymbol() == null) throw new SymbolNotFoundException();
         quote.setTimestamp(Timestamp.valueOf(LocalDateTime.now()));
         return quote;
     }

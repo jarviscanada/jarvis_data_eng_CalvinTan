@@ -30,7 +30,19 @@ public class Controller {
         Controller con = new Controller();
         con.setAction(args[0]);
         con.setSymbol(args[1]);
-        if (con.getAction().equals("buy")) con.setAmount(args[2]);
+        if (con.getAction().equals("buy")) {
+            if (args.length < 3) {
+                logger.error("ERROR: must specify number of shares to buy\n" +
+                        "arguments must be: buy symbol amount");
+                return;
+            }
+            try {
+                con.setAmount(args[2]);
+            } catch (NumberFormatException e) {
+                logger.error("ERROR: integer for number of shares to purchase expected but not found");
+                return;
+            }
+        }
         con.logOrder();
 
         switch (con.getAction()) {
@@ -75,7 +87,7 @@ public class Controller {
         return this.symbol;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(String amount) throws NumberFormatException {
         this.amount = Integer.parseInt(amount);
     }
 
