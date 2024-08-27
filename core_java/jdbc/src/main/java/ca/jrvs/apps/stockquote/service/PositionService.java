@@ -32,6 +32,7 @@ public class PositionService {
         Quote quote = quoteService.findBySymbol(symbol);
         if (quote.getVolume() <= numberOfShares) {
             logger.error("ERROR: purchasing more shares than available. Try again with smaller order");
+            return null;
         }
 
         prevPosition = dao.findBySymbol(symbol);
@@ -44,6 +45,7 @@ public class PositionService {
                     price + prevPosition.getValuePaid());
             dao.update(newPosition);
         }
+        logBuy(newPosition);
         return newPosition;
     }
 
@@ -52,7 +54,33 @@ public class PositionService {
      * @param symbol
      */
     public void sell(String symbol) {
-        dao.delete(symbol);
+        Optional<Quote> quoteOptional = quoteService.fetchQuoteDataFromAPI(symbol);
+        Position position = dao.findBySymbol(symbol);
+        if (quoteOptional.isEmpty()) {
+            logger.error("ERROR: up to date info on symbol not found");
+        } else if (position == null) {
+            logger.error("ERROR: no position found for this symbol");
+        } else {
+            Quote quote = quoteOptional.get();
+            dao.delete(symbol);
+            logSell(quote, position);
+        }
+    }
+
+    private void logBuy(Position position) {
+        StringBuilder buyLog = new StringBuilder();
+        buyLog.append(position.getSymbol() + " Bought successfully")
+                .append("total shares: " + position.getNumOfShares())
+                .append("total amount paid: " + position.getValuePaid());
+        logger.info(String.valueOf(buyLog));
+    }
+
+    private void logSell(Quote quote, Position position) {
+        StringBuilder sellLog = new StringBuilder();
+        sellLog.append(position.getSymbol() + " Sold successfully")
+                .append("sell price: " + quote.getPrice())
+                .append("profit/loss: " + (quote.getPrice()*position.getNumOfShares() - position.getValuePaid()));
+        logger.info(String.valueOf(sellLog));
     }
 
     private Position newPosition(String symbol, int numberOfShares, double price) {

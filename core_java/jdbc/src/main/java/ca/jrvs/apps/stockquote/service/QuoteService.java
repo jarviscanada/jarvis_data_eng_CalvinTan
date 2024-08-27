@@ -39,9 +39,12 @@ public class QuoteService {
         }
     }
 
-    public Quote fetchQuoteDataFromAPIAndInsert(String symbol) {
+    public Optional<Quote> fetchQuoteDataFromAPIAndInsert(String symbol) {
         Optional<Quote> quoteOptional = fetchQuoteDataFromAPI(symbol);
-        if (quoteOptional.isEmpty()) logger.error("ERROR: symbol not found");
+        if (quoteOptional.isEmpty()) {
+            logger.error("ERROR: symbol not found");
+            return quoteOptional;
+        }
         Quote quote = quoteOptional.get();
         Quote prevQuote = dao.findBySymbol(symbol);
         if (prevQuote == null) {
@@ -49,7 +52,7 @@ public class QuoteService {
         } else {
             dao.update(quote);
         }
-        return quote;
+        return quoteOptional;
     }
 
 

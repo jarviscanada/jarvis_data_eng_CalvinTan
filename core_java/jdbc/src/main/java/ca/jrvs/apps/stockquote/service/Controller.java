@@ -6,6 +6,7 @@ import ca.jrvs.apps.util.LoggerUtil;
 import org.slf4j.Logger;
 
 import java.sql.Connection;
+import java.util.Optional;
 
 public class Controller {
     static Logger logger = LoggerUtil.getLogger();
@@ -34,8 +35,13 @@ public class Controller {
 
         switch (con.getAction()) {
             case "buy" :
-                Quote quote = con.quoteService.fetchQuoteDataFromAPIAndInsert(con.getSymbol());
-                con.positionService.buy(con.getSymbol(), con.getAmount() , quote.getPrice() * con.getAmount());
+                Optional<Quote> quoteOptional = con.quoteService.fetchQuoteDataFromAPIAndInsert(con.getSymbol());
+                if (quoteOptional.isEmpty()) {
+                    break;
+                } else {
+                    Quote quote = quoteOptional.get();
+                    con.positionService.buy(con.getSymbol(), con.getAmount() , quote.getPrice() * con.getAmount());
+                }
                 break;
             case "sell" :
                 con.positionService.sell(con.getSymbol());
@@ -51,9 +57,9 @@ public class Controller {
 
     private void logOrder() {
         StringBuilder order = new StringBuilder();
-        order.append("New order received: \n")
-            .append("Symbol: " + this.symbol + "\n")
-            .append("Amount of shares: " + this.amount + "\n");
+        order.append("New " + this.action + " order received: \n")
+                .append("Symbol: " + this.symbol + "\n");
+        if (this.action.equals("buy")) order.append("Amount of shares: " + this.amount + "\n");
         logger.info(String.valueOf(order));
     }
 
