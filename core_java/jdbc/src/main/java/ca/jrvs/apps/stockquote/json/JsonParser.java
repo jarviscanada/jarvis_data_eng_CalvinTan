@@ -16,7 +16,6 @@ public class JsonParser {
             JsonNode jsonNode = mapper.readTree(json);
             jsonNode = jsonNode.get("Global Quote");
             T obj = (T) mapper.readValue(jsonNode.toString(), clazz);
-            logger.debug("DEBUG: class:" + obj.getClass());
             return obj;
         } catch (JsonProcessingException e) {
             logger.error("ERROR: failed to parse json string", e);

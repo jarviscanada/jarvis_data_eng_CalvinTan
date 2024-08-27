@@ -42,6 +42,9 @@ public class QuoteDAO implements CrudDAO<Quote, ID> {
     private static final String DELETE = "DELETE FROM quote " +
             "WHERE id = ?";
 
+    private static final String DELETE_SYMBOL = "DELETE FROM quote " +
+            "WHERE symbol = ?";
+
     public QuoteDAO(Connection connection) {
         this.connection = connection;
     }
@@ -99,8 +102,9 @@ public class QuoteDAO implements CrudDAO<Quote, ID> {
         try (PreparedStatement statement = this.connection.prepareStatement(SELECT_BY_SYMBOL)) {
             statement.setString(1, symbol);
             ResultSet resultSet = statement.executeQuery();
-            Quote quote = new Quote();
+            Quote quote = null;
             while (resultSet.next()) {
+                quote = new Quote();
                 quote.setId(new ID(resultSet.getInt("id")));
                 quote.setSymbol(resultSet.getString("symbol"));
                 quote.setOpen(resultSet.getDouble("open"));
@@ -113,6 +117,7 @@ public class QuoteDAO implements CrudDAO<Quote, ID> {
                 quote.setChange(resultSet.getDouble("change"));
                 quote.setChangePercent(resultSet.getString("change_percent"));
                 quote.setTimestamp(resultSet.getTimestamp("timestamp"));
+                return quote;
             }
             return quote;
         } catch (SQLException e) {
@@ -175,6 +180,15 @@ public class QuoteDAO implements CrudDAO<Quote, ID> {
     public void delete(ID id) {
         try (PreparedStatement statement = this.connection.prepareStatement(DELETE)) {
             statement.setLong(1, id.getId());
+            statement.execute();
+        } catch (SQLException e) {
+            logger.error("ERROR: failed to delete by id", e);
+        }
+    }
+
+    public void delete(String symbol) {
+        try (PreparedStatement statement = this.connection.prepareStatement(DELETE_SYMBOL)) {
+            statement.setString(1, symbol);
             statement.execute();
         } catch (SQLException e) {
             logger.error("ERROR: failed to delete by id", e);

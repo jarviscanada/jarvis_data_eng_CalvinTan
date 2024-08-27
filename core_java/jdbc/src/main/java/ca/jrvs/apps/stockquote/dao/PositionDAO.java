@@ -23,19 +23,26 @@ public class PositionDAO implements CrudDAO<Position, ID> {
             "FROM position " +
             "WHERE id = ?";
 
+    private static final String SELECT_BY_SYMBOL = "SELECT * " +
+            "FROM position " +
+            "WHERE symbol = ?";
+
     private static final String SELECT_ALL = "SELECT * " +
             "FROM position";
 
-    private static final String UPDATE = "UPDATE position SET" +
+    private static final String UPDATE = "UPDATE position SET " +
             "symbol = ?, number_of_shares = ?, value_paid = ? " +
             "WHERE id = ?";
 
-    private static final String UPDATE_SELL = "UPDATE position SET" +
-            "symbol = ?, number_of_shares = ?, value_paid = ? " +
-            "WHERE id = ?";
+    private static final String UPDATE_BY_SYMBOL = "UPDATE position SET " +
+            "number_of_shares = ?, value_paid = ? " +
+            "WHERE symbol = ?";
 
     private static final String DELETE = "DELETE FROM position " +
             "WHERE id = ?";
+
+    private static final String DELETE_SYMBOL = "DELETE FROM position " +
+            "WHERE symbol = ?";
 
     public PositionDAO(Connection connection) {
         this.connection = connection;
@@ -74,6 +81,25 @@ public class PositionDAO implements CrudDAO<Position, ID> {
         return null;
     }
 
+    public Position findBySymbol(String symbol) {
+        try (PreparedStatement statement = this.connection.prepareStatement(SELECT_BY_SYMBOL)) {
+            statement.setString(1, symbol);
+            ResultSet resultSet = statement.executeQuery();
+            Position position = null;
+            while (resultSet.next()) {
+                position = new Position();
+                position.setId(new ID(resultSet.getInt("id")));
+                position.setSymbol(resultSet.getString("symbol"));
+                position.setNumOfShares(resultSet.getInt("number_of_shares"));
+                position.setValuePaid(resultSet.getDouble("value_paid"));
+            }
+            return position;
+        } catch (SQLException e) {
+            logger.error("ERROR: failed to find quote by id", e);
+        }
+        return null;
+    }
+
     @Override
     public List<Position> findAll() {
         try (PreparedStatement statement = this.connection.prepareStatement(SELECT_ALL)) {
@@ -96,25 +122,10 @@ public class PositionDAO implements CrudDAO<Position, ID> {
 
     @Override
     public Position update(Position dto) {
-        try (PreparedStatement statement = this.connection.prepareStatement(UPDATE)) {
-            statement.setString(1, dto.getSymbol());
-            statement.setInt(2, dto.getNumOfShares());
-            statement.setDouble(3, dto.getValuePaid());
-            statement.setLong(4, dto.getId().getId());
-            statement.execute();
-            return dto;
-        } catch (SQLException e) {
-            logger.error("ERROR: failed to insert new quote", e);
-        }
-        return null;
-    }
-
-    public Position updateSell(Position dto) {
-        try (PreparedStatement statement = this.connection.prepareStatement(UPDATE)) {
-            statement.setString(1, dto.getSymbol());
-            statement.setInt(2, dto.getNumOfShares());
-            statement.setDouble(3, dto.getValuePaid());
-            statement.setLong(4, dto.getId().getId());
+        try (PreparedStatement statement = this.connection.prepareStatement(UPDATE_BY_SYMBOL)) {
+            statement.setInt(1, dto.getNumOfShares());
+            statement.setDouble(2, dto.getValuePaid());
+            statement.setString(3, dto.getSymbol());
             statement.execute();
             return dto;
         } catch (SQLException e) {
@@ -127,6 +138,15 @@ public class PositionDAO implements CrudDAO<Position, ID> {
     public void delete(ID id) {
         try (PreparedStatement statement = this.connection.prepareStatement(DELETE)) {
             statement.setLong(1, id.getId());
+            statement.execute();
+        } catch (SQLException e) {
+            logger.error("ERROR: failed to delete by id", e);
+        }
+    }
+
+    public void delete(String symbol) {
+        try (PreparedStatement statement = this.connection.prepareStatement(DELETE_SYMBOL)) {
+            statement.setString(1, symbol);
             statement.execute();
         } catch (SQLException e) {
             logger.error("ERROR: failed to delete by id", e);

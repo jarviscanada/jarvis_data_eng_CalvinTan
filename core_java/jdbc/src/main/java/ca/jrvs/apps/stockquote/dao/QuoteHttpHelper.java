@@ -28,16 +28,6 @@ public class QuoteHttpHelper {
         this.apiKey = properties.getProperty("api-key");
     }
 
-    public static void main(String[] args) {
-        QuoteHttpHelper obj = new QuoteHttpHelper();
-        try {
-            Quote quote = obj.fetchQuoteInfo("MSFT");
-            logger.debug(quote.getSymbol() + ": " + quote.getPrice());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     /**
      * fetch latest quote data from Alpha Vantage
      * @param symbol
