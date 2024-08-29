@@ -1,4 +1,4 @@
-package ca.jrvs.apps.stockquote.api;
+package ca.jrvs.apps.stockquote.service;
 
 
 import ca.jrvs.apps.util.LoggerUtil;

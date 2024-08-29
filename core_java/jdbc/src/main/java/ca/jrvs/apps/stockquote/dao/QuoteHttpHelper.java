@@ -1,9 +1,8 @@
 package ca.jrvs.apps.stockquote.dao;
 
-import ca.jrvs.apps.stockquote.api.AlphaVantageAPI;
-import ca.jrvs.apps.stockquote.json.JsonParser;
+import ca.jrvs.apps.stockquote.service.AlphaVantageAPI;
+import ca.jrvs.apps.stockquote.service.JsonParser;
 import ca.jrvs.apps.util.LoggerUtil;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.OkHttpClient;
 import okhttp3.Response;
 import org.slf4j.Logger;

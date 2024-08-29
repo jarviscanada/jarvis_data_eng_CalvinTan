@@ -1,4 +1,4 @@
-package ca.jrvs.apps.stockquote.json;
+package ca.jrvs.apps.stockquote.service;
 
 import ca.jrvs.apps.util.LoggerUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
