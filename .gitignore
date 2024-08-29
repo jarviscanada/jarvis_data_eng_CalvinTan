@@ -9,3 +9,4 @@ target/
 .eclipse
 core_java/grep/src/test/java/ca/jrvs/apps/Test.java
 /core_java/grep/out
+core_java/jdbc/src/main/java/ca/jrvs/apps/stockquote/JDBCExecutor.java
