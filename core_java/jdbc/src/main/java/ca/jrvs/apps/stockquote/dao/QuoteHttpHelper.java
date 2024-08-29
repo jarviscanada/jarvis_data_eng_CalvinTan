@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Properties;
@@ -43,7 +44,8 @@ public class QuoteHttpHelper {
 
     private void loadProperties() {
         try {
-            this.properties.load(new FileInputStream("alpha_vantage.properties"));
+            String path = Paths.get("alpha_vantage.properties").toString();
+            this.properties.load(this.getClass().getClassLoader().getResourceAsStream(path));
         } catch (IOException e) {
             logger.error("ERROR: failed to load or use api key");
         }

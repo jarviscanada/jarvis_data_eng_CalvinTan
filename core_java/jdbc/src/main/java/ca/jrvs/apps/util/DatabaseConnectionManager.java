@@ -2,8 +2,11 @@ package ca.jrvs.apps.util;
 
 import org.slf4j.Logger;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -22,26 +25,27 @@ public class DatabaseConnectionManager {
         this.properties.setProperty("password", password);
     }
 
-    public DatabaseConnectionManager(String host, String databaseName) {
-        this.url = "jdbc:postgresql://" + host + "/" + databaseName;
+    public DatabaseConnectionManager() {
         this.properties = new Properties();
         this.loadProperties();
+        this.url = "jdbc:postgresql://" + this.properties.getProperty("host") + "/" + this.properties.getProperty("database");
     }
 
-    public Connection getConnection() {
+    public Connection getConnection() throws SQLException {
         try {
             return DriverManager.getConnection(this.url, this.properties);
         } catch (SQLException e) {
             this.logger.error("ERROR: failed to establish connection");
+            throw new SQLException();
         }
-        throw new RuntimeException();
     }
 
     private void loadProperties() {
         try {
-            this.properties.load(new FileInputStream("db.properties"));
+            String path = Paths.get("db.properties").toString();
+            this.properties.load(this.getClass().getClassLoader().getResourceAsStream(path));
         } catch (IOException e) {
-            logger.error("ERROR: failed to load user and password from properties file");
+            logger.error("ERROR: failed to load database properties from properties file");
         }
     }
 }
