@@ -7,6 +7,7 @@ import ca.jrvs.apps.util.LoggerUtil;
 import org.slf4j.Logger;
 
 import java.sql.Connection;
+import java.util.List;
 import java.util.Optional;
 
 public class PositionService {
@@ -59,7 +60,7 @@ public class PositionService {
         Optional<Quote> quoteOptional = quoteService.fetchQuoteDataFromAPI(symbol);
         Position position = dao.findBySymbol(symbol);
         if (quoteOptional.isEmpty()) {
-            logger.error("ERROR: up to date info on symbol not found");
+            return;
         } else if (position == null) {
             logger.error("ERROR: no position found for this symbol");
         } else {
@@ -68,6 +69,12 @@ public class PositionService {
             logSell(quote, position);
         }
     }
+
+    public void list() {
+        List<Position> positions = dao.findAll();
+        logPositions(positions);
+    }
+
 
     private void logBuy(Position position) {
         StringBuilder buyLog = new StringBuilder();
@@ -83,6 +90,17 @@ public class PositionService {
                 .append("sell price: " + quote.getPrice() + "\n")
                 .append("profit/loss: " + (quote.getPrice()*position.getNumOfShares() - position.getValuePaid()) + "\n");
         logger.info(String.valueOf(sellLog));
+    }
+
+    private void logPositions(List<Position> positions) {
+        StringBuilder output = new StringBuilder();
+        output.append("Current Positions:\n");
+        for (Position p : positions) {
+            output.append("Symbol: " + p.getSymbol() + "\n")
+                    .append("Number of shares: " + p.getNumOfShares() + "\n")
+                    .append("Amount Paid: " + p.getValuePaid() + "\n");
+        }
+        logger.info(String.valueOf(output));
     }
 
     private Position newPosition(String symbol, int numberOfShares, double price) {

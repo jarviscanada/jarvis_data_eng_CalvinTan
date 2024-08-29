@@ -31,13 +31,19 @@ public class QuoteService {
      * @param symbol
      * @return Latest quote information or empty optional if ticker symbol not found
      */
-    public Optional<Quote> fetchQuoteDataFromAPI(String symbol) {
+    public Optional<Quote> fetchQuoteDataFromAPI(String symbol, boolean log) {
         try {
             Quote quote = this.httpHelper.fetchQuoteInfo(symbol);
+            if (log) this.logQuote(quote);
             return Optional.of(quote);
         } catch (IOException | SymbolNotFoundException e) {
+            logger.error("ERROR: symbol not found");
             return Optional.empty();
         }
+    }
+
+    public Optional<Quote> fetchQuoteDataFromAPI(String symbol) {
+        return this.fetchQuoteDataFromAPI(symbol, false);
     }
 
     public Optional<Quote> fetchQuoteDataFromAPIAndInsert(String symbol) {
@@ -54,6 +60,14 @@ public class QuoteService {
             dao.update(quote);
         }
         return quoteOptional;
+    }
+
+    private void logQuote(Quote quote) {
+        StringBuilder quoteString = new StringBuilder();
+        quoteString.append("Symbol: " + quote.getSymbol() + "\n")
+                .append("Current Price: " + quote.getPrice() + "\n")
+                .append("Time retrieved: " + quote.getTimestamp() + "\n");
+        logger.info(String.valueOf(quoteString));
     }
 
 
