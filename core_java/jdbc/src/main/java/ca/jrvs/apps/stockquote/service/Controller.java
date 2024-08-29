@@ -52,7 +52,7 @@ public class Controller {
                     break;
                 } else {
                     Quote quote = quoteOptional.get();
-                    con.positionService.buy(con.getSymbol(), con.getAmount() , quote.getPrice() * con.getAmount());
+                    con.positionService.buy(con.getSymbol(), con.getAmount() , quote.getPrice());
                 }
                 break;
             case "sell" :

@@ -134,20 +134,6 @@ public class PositionDAO implements CrudDAO<Position, ID> {
         return null;
     }
 
-    public Position updateSell(Position dto) {
-        try (PreparedStatement statement = this.connection.prepareStatement(UPDATE)) {
-            statement.setString(1, dto.getSymbol());
-            statement.setInt(2, dto.getNumOfShares());
-            statement.setDouble(3, dto.getValuePaid());
-            statement.setLong(4, dto.getId().getId());
-            statement.execute();
-            return dto;
-        } catch (SQLException e) {
-            logger.error("ERROR: failed to insert new quote", e);
-        }
-        return null;
-    }
-
     @Override
     public void delete(ID id) {
         try (PreparedStatement statement = this.connection.prepareStatement(DELETE)) {

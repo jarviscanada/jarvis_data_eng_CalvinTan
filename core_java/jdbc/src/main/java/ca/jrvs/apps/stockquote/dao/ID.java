@@ -4,15 +4,22 @@ public class ID {
 
     private long id;
 
-    ID(long id) {
+    public ID(long id) {
         this.id = id;
+    }
+
+    public int toInt() {
+        return (int) id;
     }
 
     public long getId() {
         return id;
     }
 
+
     public void setId(long id) {
         this.id = id;
     }
+
+
 }

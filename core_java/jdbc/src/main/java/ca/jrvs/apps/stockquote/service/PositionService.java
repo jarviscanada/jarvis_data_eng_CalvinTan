@@ -24,9 +24,11 @@ public class PositionService {
      * Processes a buy order and updates the database accordingly
      * @param symbol
      * @param numberOfShares
+     * @param price
      * @return The position in our database after processing the buy
      */
     public Position buy(String symbol, int numberOfShares, double price) {
+        double totalPaid = numberOfShares*price;
         Position newPosition;
         Position prevPosition;
         Quote quote = quoteService.findBySymbol(symbol);
@@ -37,12 +39,12 @@ public class PositionService {
 
         prevPosition = dao.findBySymbol(symbol);
         if (prevPosition == null) {
-            newPosition = newPosition(symbol, numberOfShares, price);
+            newPosition = newPosition(symbol, numberOfShares, totalPaid);
             dao.create(newPosition);
         } else {
             newPosition = newPosition(symbol,
                     numberOfShares + prevPosition.getNumOfShares(),
-                    price + prevPosition.getValuePaid());
+                    totalPaid + prevPosition.getValuePaid());
             dao.update(newPosition);
         }
         logBuy(newPosition);
@@ -89,5 +91,9 @@ public class PositionService {
         newPosition.setNumOfShares(numberOfShares);
         newPosition.setValuePaid(price);
         return newPosition;
+    }
+
+    public void setQuoteService(QuoteService quoteService) {
+        this.quoteService = quoteService;
     }
 }
