@@ -4,11 +4,12 @@ import ca.jrvs.apps.util.DatabaseConnectionManager;
 import ca.jrvs.apps.util.LoggerUtil;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 public class JDBCExecutor {
 
     //note: testCustomer id: 10,000
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         DatabaseConnectionManager dcm = new DatabaseConnectionManager(
                 "localhost", "hplussport", "postgres", "password");
         Connection connection = dcm.getConnection();
