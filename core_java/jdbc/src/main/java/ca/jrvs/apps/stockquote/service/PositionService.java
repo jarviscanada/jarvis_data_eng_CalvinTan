@@ -29,6 +29,10 @@ public class PositionService {
      * @return The position in our database after processing the buy
      */
     public Position buy(String symbol, int numberOfShares, double price) {
+        if (numberOfShares < 0) {
+            logger.error("ERROR: can not purchase negative number of shares");
+            return null;
+        }
         double totalPaid = numberOfShares*price;
         Position newPosition;
         Position prevPosition;

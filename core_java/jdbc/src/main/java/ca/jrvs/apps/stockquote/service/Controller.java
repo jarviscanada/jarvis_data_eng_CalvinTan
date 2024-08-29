@@ -6,92 +6,127 @@ import ca.jrvs.apps.util.LoggerUtil;
 import org.slf4j.Logger;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Optional;
+import java.util.Scanner;
 
 public class Controller {
     static Logger logger = LoggerUtil.getLogger();
-    static Connection connection = new DatabaseConnectionManager("localhost", "stock_quote")
-            .getConnection();
-    private PositionService positionService;
-    private QuoteService quoteService;
-    private String action;
-    private String symbol;
-    private int amount;
+    Connection connection;
+    Scanner in;
 
-    public Controller() {
-        positionService = new PositionService(connection);
-        quoteService = new QuoteService(connection);
+    Controller() {
+        this.in = new Scanner(System.in);
     }
 
     public static void main(String[] args) {
-        if (args.length < 2 || 3 < args.length) {
-            logger.error("ERROR: arguments must be: buy|sell symbol [amount]");
+        Controller controller = new Controller();
+        controller.initClient();
+    }
+
+    public void initClient() {
+        if (this.connectToDatabase()) {
+            logger.info("Successfully connected to database");
+        } else {
+            return;
         }
-        Controller con = new Controller();
-        con.setAction(args[0]);
-        con.setSymbol(args[1]);
-        if (con.getAction().equals("buy")) {
-            if (args.length < 3) {
-                logger.error("ERROR: must specify number of shares to buy\n" +
-                        "arguments must be: buy symbol amount");
-                return;
+        PositionService positionService = new PositionService(this.connection);
+        QuoteService quoteService = new QuoteService(this.connection);
+        this.help();
+
+        boolean quit = false;
+        while(!quit) {
+            String action;
+            String symbol;
+            int amount;
+            String[] input = in.nextLine().trim().split(" ");
+            if (input.length == 0) {
+                logger.warn("No input received, try again");
+                continue;
+            } else {
+                action = input[0].toLowerCase();
+            }
+
+            switch (action) {
+                case "buy":
+                    if (input.length != 3) break;
+                    symbol = input[1].toUpperCase();
+                    try { amount = Integer.parseInt(input[2]); } catch (NumberFormatException e) {
+                        logger.warn("WARNING: Amount enter too large or not an integer");
+                        break;
+                    }
+                    Optional<Quote> quoteOptional = quoteService.fetchQuoteDataFromAPIAndInsert(symbol);
+                    if (quoteOptional.isEmpty()) {
+                        break;
+                    } else {
+                        Quote quote = quoteOptional.get();
+                        positionService.buy(symbol, amount, quote.getPrice());
+                    }
+                    break;
+                case "sell":
+                    if (input.length != 2) break;
+                    symbol = input[1].toUpperCase();
+                    positionService.sell(symbol);
+                    break;
+                case "quote":
+                    if (input.length != 2) break;
+                    symbol = input[1].toUpperCase();
+                    quoteService.fetchQuoteDataFromAPI(symbol, true);
+                case "list":
+                    if (input.length != 1) break;
+                    positionService.list();
+                    break;
+                case "quit":
+                    quit = true;
+                    logger.info("Exiting program");
+                case "help":
+                    if (input.length != 1) break;
+                    this.help();
+                    break;
+                default:
+                    logger.warn("WARNING: Command not recognised");
+            }
+        }
+        in.close();
+    }
+
+    public boolean connectToDatabase() {
+        try {
+            this.connection = new DatabaseConnectionManager().getConnection();
+            return true;
+        } catch (SQLException e) {
+            logger.warn("WARNING: failed to connect to database using default settings, please connect manually to a database or enter quit to exit");
+        }
+        while (this.connection == null) {
+            logger.info("Enter: host database username password | quit");
+            String[] input = in.nextLine().trim().split(" ");
+            if (input.length == 0) {
+                logger.warn("No input received, try again");
+                continue;
+            } else if (input.length == 1 && input[0].toLowerCase().equals("quit")) {
+                logger.info("Exiting program");
+                return false;
             }
             try {
-                con.setAmount(args[2]);
-            } catch (NumberFormatException e) {
-                logger.error("ERROR: integer for number of shares to purchase expected but not found");
-                return;
+                this.connection = new DatabaseConnectionManager(input[0], input[1], input[2], input[3]).getConnection();
+                return true;
+            } catch (SQLException e) {
+                logger.error("ERROR: failed to connect to database");
+            } catch (IndexOutOfBoundsException e) {
+                logger.error("ERROR: not enough arguments received, try again");
             }
         }
-        con.logOrder();
-
-        switch (con.getAction()) {
-            case "buy" :
-                Optional<Quote> quoteOptional = con.quoteService.fetchQuoteDataFromAPIAndInsert(con.getSymbol());
-                if (quoteOptional.isEmpty()) {
-                    break;
-                } else {
-                    Quote quote = quoteOptional.get();
-                    con.positionService.buy(con.getSymbol(), con.getAmount() , quote.getPrice());
-                }
-                break;
-            case "sell" :
-                con.positionService.sell(con.getSymbol());
-                break;
-        }
+        return false;
     }
 
-    public void setAction(String action) {
-        action = action.toLowerCase();
-        if (!(action.equals("buy") || action.equals("sell"))) logger.error("ERROR: action must be either buy or sell");
-        this.action = action;
-    }
-
-    private void logOrder() {
-        StringBuilder order = new StringBuilder();
-        order.append("New " + this.action + " order received: \n")
-                .append("Symbol: " + this.symbol + "\n");
-        if (this.action.equals("buy")) order.append("Amount of shares: " + this.amount + "\n");
-        logger.info(String.valueOf(order));
-    }
-
-    public String getAction() {
-        return this.action;
-    }
-
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-    }
-
-    public String getSymbol() {
-        return this.symbol;
-    }
-
-    public void setAmount(String amount) throws NumberFormatException {
-        this.amount = Integer.parseInt(amount);
-    }
-
-    public int getAmount() {
-        return this.amount;
+    private void help() {
+        StringBuilder help = new StringBuilder();
+        help.append("Commands:\n")
+                .append("1. buy symbol amount : buy shares\n")
+                .append("2. sell symbol : sell all shares for a position\n")
+                .append("3. quote symbol : view up to date quote for symbol\n")
+                .append("4. list : view all current positions\n")
+                .append("5. quit : exit program\n");
+        logger.info(String.valueOf(help));
     }
 }
