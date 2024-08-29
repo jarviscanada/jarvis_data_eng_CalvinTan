@@ -24,7 +24,11 @@ public class Controller {
         controller.initClient();
     }
 
+    /**
+     * Main program
+     */
     public void initClient() {
+        //establish connection to database
         if (this.connectToDatabase()) {
             logger.info("Successfully connected to database");
         } else {
@@ -34,11 +38,13 @@ public class Controller {
         QuoteService quoteService = new QuoteService(this.connection);
         this.help();
 
+        //main program loop
         boolean quit = false;
         while(!quit) {
             String action;
             String symbol;
             int amount;
+            //get input from terminal
             String[] input = in.nextLine().trim().split(" ");
             if (input.length == 0) {
                 logger.warn("No input received, try again");
@@ -84,19 +90,25 @@ public class Controller {
                     this.help();
                     break;
                 default:
-                    logger.warn("WARNING: Command not recognised");
+                    logger.warn("WARNING: Command not recognised; enter help to see a list of commands");
             }
         }
         in.close();
     }
 
+    /**
+     * establishes a connection with database
+     * @return true if successfully connected
+     */
     public boolean connectToDatabase() {
+        //attempt to connect to database using parameters in properties file
         try {
             this.connection = new DatabaseConnectionManager().getConnection();
             return true;
         } catch (SQLException e) {
             logger.warn("WARNING: failed to connect to database using default settings, please connect manually to a database or enter quit to exit");
         }
+        //asks user to manual enter database parameters
         while (this.connection == null) {
             logger.info("Enter: host database username password | quit");
             String[] input = in.nextLine().trim().split(" ");
@@ -119,6 +131,9 @@ public class Controller {
         return false;
     }
 
+    /**
+     * Provides user with quick information on how to use client
+     */
     private void help() {
         StringBuilder help = new StringBuilder();
         help.append("Commands:\n")

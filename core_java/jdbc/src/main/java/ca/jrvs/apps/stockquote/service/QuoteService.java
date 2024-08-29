@@ -46,6 +46,11 @@ public class QuoteService {
         return this.fetchQuoteDataFromAPI(symbol, false);
     }
 
+    /**
+     * Calls fetchQuoteDataFromAPI and then insert/update into database if valid quote
+     * @param symbol
+     * @return
+     */
     public Optional<Quote> fetchQuoteDataFromAPIAndInsert(String symbol) {
         Optional<Quote> quoteOptional = fetchQuoteDataFromAPI(symbol);
         if (quoteOptional.isEmpty()) {
@@ -62,6 +67,10 @@ public class QuoteService {
         return quoteOptional;
     }
 
+    /**
+     * Logs basic quote information
+     * @param quote
+     */
     private void logQuote(Quote quote) {
         StringBuilder quoteString = new StringBuilder();
         quoteString.append("Symbol: " + quote.getSymbol() + "\n")

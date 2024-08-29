@@ -43,9 +43,11 @@ public class PositionService {
         }
 
         prevPosition = dao.findBySymbol(symbol);
+        //check if position is already held for the given symbol
         if (prevPosition == null) {
             newPosition = newPosition(symbol, numberOfShares, totalPaid);
             dao.create(newPosition);
+        //update old position if position already exists for symbol
         } else {
             newPosition = newPosition(symbol,
                     numberOfShares + prevPosition.getNumOfShares(),
@@ -74,12 +76,18 @@ public class PositionService {
         }
     }
 
+    /**
+     * List all positions held
+     */
     public void list() {
         List<Position> positions = dao.findAll();
         logPositions(positions);
     }
 
-
+    /**
+     * logs successful buy
+     * @param position
+     */
     private void logBuy(Position position) {
         StringBuilder buyLog = new StringBuilder();
         buyLog.append(position.getSymbol() + " Bought successfully\n")
@@ -88,6 +96,11 @@ public class PositionService {
         logger.info(String.valueOf(buyLog));
     }
 
+    /**
+     * logs successful sell
+     * @param quote
+     * @param position
+     */
     private void logSell(Quote quote, Position position) {
         StringBuilder sellLog = new StringBuilder();
         sellLog.append(position.getSymbol() + " Sold successfully\n")
@@ -96,6 +109,10 @@ public class PositionService {
         logger.info(String.valueOf(sellLog));
     }
 
+    /**
+     * logs all currently held positions
+     * @param positions
+     */
     private void logPositions(List<Position> positions) {
         StringBuilder output = new StringBuilder();
         output.append("Current Positions:\n");
@@ -107,6 +124,9 @@ public class PositionService {
         logger.info(String.valueOf(output));
     }
 
+    /**
+     * Helper method to create a new position object
+     */
     private Position newPosition(String symbol, int numberOfShares, double price) {
         Position newPosition = new Position();
         newPosition.setSymbol(symbol);

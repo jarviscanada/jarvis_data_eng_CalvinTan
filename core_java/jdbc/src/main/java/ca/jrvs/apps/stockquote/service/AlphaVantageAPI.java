@@ -11,6 +11,13 @@ import java.io.IOException;
 
 public class AlphaVantageAPI {
 
+    /**
+     * makes a call to Alpha Vantage api
+     * @param client
+     * @param symbol
+     * @param apiKey
+     * @return
+     */
     public static Response get(OkHttpClient client, String symbol, String apiKey) {
         try {
             Request request = buildRequest(symbol, apiKey);
@@ -22,6 +29,12 @@ public class AlphaVantageAPI {
         return null;
     }
 
+    /**
+     * sets up request object for client object
+     * @param symbol
+     * @param apiKey
+     * @return
+     */
     private static  Request buildRequest(String symbol, String apiKey) {
         HttpUrl url = HttpUrl.parse("https://alpha-vantage.p.rapidapi.com/query").newBuilder()
                 .addQueryParameter("function", "GLOBAL_QUOTE")

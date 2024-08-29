@@ -20,7 +20,7 @@ public class PositionServiceIntTest {
         positionService = new PositionService(connection);
     }
 
-    @org.junit.Test
+    @Test
     public void buy() {
         int numShares = 10;
         double price = 10;

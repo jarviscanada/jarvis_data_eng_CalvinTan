@@ -37,11 +37,15 @@ public class QuoteHttpHelper {
     public Quote fetchQuoteInfo(String symbol) throws IOException, SymbolNotFoundException {
         Response response = AlphaVantageAPI.get(this.client, symbol, this.apiKey);
         Quote quote = JsonParser.toObjectFromJson(response.body().string(), Quote.class);
+        //throws an exception if quote is null or quote symbol is null (objectMapper default)
         if (quote == null || quote.getSymbol() == null) throw new SymbolNotFoundException();
         quote.setTimestamp(Timestamp.valueOf(LocalDateTime.now()));
         return quote;
     }
 
+    /**
+     * loads api-key from properties file
+     */
     private void loadProperties() {
         try {
             String path = Paths.get("alpha_vantage.properties").toString();
