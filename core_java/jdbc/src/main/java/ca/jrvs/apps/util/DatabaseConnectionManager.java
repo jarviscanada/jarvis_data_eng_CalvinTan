@@ -35,7 +35,7 @@ public class DatabaseConnectionManager {
         try {
             return DriverManager.getConnection(this.url, this.properties);
         } catch (SQLException e) {
-            this.logger.error("ERROR: failed to establish connection");
+            this.logger.error("ERROR: failed to establish connection to database");
             throw new SQLException();
         }
     }

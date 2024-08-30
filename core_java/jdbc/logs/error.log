@@ -1,0 +1,21 @@
+2024-08-30 02:10:01 ERROR LoggerUtil:40 - ERROR: symbol not found
+2024-08-30 02:52:29 ERROR LoggerUtil:132 - ERROR: failed to insert new quote
+org.postgresql.util.PSQLException: ERROR: numeric field overflow
+  Detail: A field with precision 10, scale 2 must round to an absolute value less than 10^8.
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2440)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2183)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:308)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:441)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:365)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:143)
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:132)
+	at ca.jrvs.apps.stockquote.dao.PositionDAO.update(PositionDAO.java:129)
+	at ca.jrvs.apps.stockquote.service.PositionService.buy(PositionService.java:57)
+	at ca.jrvs.apps.stockquote.service.Controller.buy(Controller.java:98)
+	at ca.jrvs.apps.stockquote.service.Controller.initClient(Controller.java:58)
+	at ca.jrvs.apps.stockquote.service.Controller.main(Controller.java:27)
+2024-08-30 02:53:27 ERROR LoggerUtil:100 - ERROR: no position found for this symbol
+2024-08-30 02:53:53 ERROR LoggerUtil:40 - ERROR: symbol not found [FSDA]
+2024-08-30 02:54:13 ERROR LoggerUtil:40 - ERROR: symbol not found [DSFA]
+2024-08-30 02:56:13 ERROR LoggerUtil:38 - ERROR: failed to establish connection to database
+2024-08-30 02:56:43 ERROR LoggerUtil:38 - ERROR: failed to establish connection to database
