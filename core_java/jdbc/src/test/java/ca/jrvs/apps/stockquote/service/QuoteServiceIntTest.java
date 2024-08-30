@@ -30,4 +30,10 @@ public class QuoteServiceIntTest {
         Assert.assertTrue(optional.isPresent());
         Assert.assertEquals(optional.get().getSymbol(), "AAPL");
     }
+
+    @Test
+    public void fetchQuoteDataFromAPIInvalidSymbol() {
+        Optional<Quote> optional = quoteService.fetchQuoteDataFromAPI("AAAAAA");
+        Assert.assertTrue(optional.isEmpty());
+    }
 }

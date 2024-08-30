@@ -70,6 +70,14 @@ public class PositionServiceUnitTest {
     }
 
     @Test
+    public void buyInvalidNumberOfShares() {
+        int numShares = 100000000;
+        double price = 10;
+        Position actual = positionService.buy("TEST", numShares, price);
+        Assert.assertEquals(null, actual);
+    }
+
+    @Test
     public void sell() {
         positionService.sell("TEST");
         Assert.assertTrue(true);
