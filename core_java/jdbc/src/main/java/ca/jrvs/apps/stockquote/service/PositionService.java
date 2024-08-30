@@ -64,10 +64,9 @@ public class PositionService {
      */
     public void sell(String symbol) {
         Optional<Quote> quoteOptional = quoteService.fetchQuoteDataFromAPI(symbol);
+        if (quoteOptional.isEmpty()) return;
         Position position = dao.findBySymbol(symbol);
-        if (quoteOptional.isEmpty()) {
-            return;
-        } else if (position == null) {
+        if (position == null) {
             logger.error("ERROR: no position found for this symbol");
         } else {
             Quote quote = quoteOptional.get();
@@ -82,6 +81,22 @@ public class PositionService {
     public void list() {
         List<Position> positions = dao.findAll();
         logPositions(positions);
+    }
+
+    /**
+     * Checks position and computes gain/loss from current quote
+     * @param symbol
+     */
+    public void check(String symbol) {
+        Optional<Quote> quoteOptional = quoteService.fetchQuoteDataFromAPI(symbol);
+        if (quoteOptional.isEmpty()) return;
+        Position position = dao.findBySymbol(symbol);
+        if (position == null) {
+            logger.error("ERROR: no position found for this symbol");
+        } else {
+            Quote quote = quoteOptional.get();
+            logCheck(quote, position);
+        }
     }
 
     /**
@@ -102,10 +117,11 @@ public class PositionService {
      * @param position
      */
     private void logSell(Quote quote, Position position) {
+        double netChange = Math.round((quote.getPrice()*position.getNumOfShares() - position.getValuePaid())*100) / 100.0;
         StringBuilder sellLog = new StringBuilder();
         sellLog.append(position.getSymbol() + " Sold successfully\n")
                 .append("sell price: " + quote.getPrice() + "\n")
-                .append("profit/loss: " + (quote.getPrice()*position.getNumOfShares() - position.getValuePaid()) + "\n");
+                .append("profit/loss: " + netChange + "\n");
         logger.info(String.valueOf(sellLog));
     }
 
@@ -122,6 +138,25 @@ public class PositionService {
                     .append("Amount Paid: " + p.getValuePaid() + "\n");
         }
         logger.info(String.valueOf(output));
+    }
+
+    /**
+     * compares and logs position and quote
+     * @param quote
+     * @param position
+     */
+    private void logCheck(Quote quote, Position position) {
+        double pricePerShare = Math.round((position.getValuePaid()/position.getNumOfShares())*100) / 100.0;
+        double percentChange = Math.round((quote.getPrice()/pricePerShare)*100) / 100.0;
+        double netChange = Math.round((quote.getPrice()*position.getNumOfShares() - position.getValuePaid())*100) / 100.0;
+        StringBuilder log = new StringBuilder();
+        log.append("Symbol: " + position.getSymbol() + "\n")
+                .append("Number of shares: " + position.getNumOfShares() + "\n")
+                .append("Amount Paid: " + position.getValuePaid() + "\n")
+                .append("Price per share: " + pricePerShare + "\n") //round to 2 decimal places
+                .append("Current price per share: " + quote.getPrice() + "\n")
+                .append("Net change: " + netChange + " (" + percentChange +"%)\n");
+        logger.info(String.valueOf(log));
     }
 
     /**

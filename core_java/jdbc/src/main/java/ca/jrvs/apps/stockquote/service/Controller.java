@@ -58,16 +58,13 @@ public class Controller {
                     if (input.length != 3) break;
                     symbol = input[1].toUpperCase();
                     try { amount = Integer.parseInt(input[2]); } catch (NumberFormatException e) {
-                        logger.warn("WARNING: Amount enter too large or not an integer");
+                        logger.warn("WARNING: Amount entered too large or not an integer");
                         break;
                     }
                     Optional<Quote> quoteOptional = quoteService.fetchQuoteDataFromAPIAndInsert(symbol);
-                    if (quoteOptional.isEmpty()) {
-                        break;
-                    } else {
-                        Quote quote = quoteOptional.get();
-                        positionService.buy(symbol, amount, quote.getPrice());
-                    }
+                    if (quoteOptional.isEmpty()) break;
+                    Quote quote = quoteOptional.get();
+                    positionService.buy(symbol, amount, quote.getPrice());
                     break;
                 case "sell":
                     if (input.length != 2) break;
@@ -81,6 +78,11 @@ public class Controller {
                 case "list":
                     if (input.length != 1) break;
                     positionService.list();
+                    break;
+                case "check":
+                    if (input.length != 2) break;
+                    symbol = input[1].toUpperCase();
+                    positionService.check(symbol);
                     break;
                 case "quit":
                     quit = true;
@@ -141,7 +143,8 @@ public class Controller {
                 .append("2. sell symbol : sell all shares for a position\n")
                 .append("3. quote symbol : view up to date quote for symbol\n")
                 .append("4. list : view all current positions\n")
-                .append("5. quit : exit program\n");
+                .append("5. check symbol : check current position and view gain/loss\n")
+                .append("6. quit : exit program\n");
         logger.info(String.valueOf(help));
     }
 }
