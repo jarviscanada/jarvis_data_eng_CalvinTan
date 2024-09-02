@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.Optional;
 import java.util.Scanner;
 
-public class Controller {
+public class Controller  {
 
     static Logger logger = LoggerUtil.getLogger();
     PositionService positionService;

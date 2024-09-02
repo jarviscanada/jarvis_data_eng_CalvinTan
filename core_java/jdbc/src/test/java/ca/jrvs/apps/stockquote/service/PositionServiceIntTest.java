@@ -33,7 +33,7 @@ public class PositionServiceIntTest {
         int numShares = 100000000;
         double price = 10;
         Position actual = positionService.buy("AAPL", numShares, price);
-        Assert.assertEquals(null, actual);
+        Assert.assertNull(actual);
     }
 
     @Test

@@ -14,6 +14,7 @@ public class JsonParser {
         ObjectMapper mapper = new ObjectMapper();
         try {
             JsonNode jsonNode = mapper.readTree(json);
+            if (jsonNode == null) throw new RuntimeException();
             jsonNode = jsonNode.get("Global Quote");
             T obj = (T) mapper.readValue(jsonNode.toString(), clazz);
             return obj;
