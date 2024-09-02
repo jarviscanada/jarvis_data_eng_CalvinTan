@@ -14,6 +14,8 @@
         <com.squareup.okhtttp3.version>5.0.0-alpha.11</com.squareup.okhtttp3.version>
         <org.mockito.version>5.7.0</org.mockito.version>
         <junit.version>4.13.2</junit.version>
+        <shade.version>2.3</shade.version>
+        <surefire.version>2.17</surefire.version>
     </properties>
 
     <dependencies>
@@ -54,10 +56,33 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>${shade.version}</version>
                 <configuration>
-                    <source>11</source>
-                    <target>11</target>
+                    <transformers>
+                        <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                            <mainClass>ca.jrvs.apps.stockquote.service.Controller</mainClass>
+                        </transformer>
+                    </transformers>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire.version}</version>
+                <configuration>
+                    <excludes>
+                        <exclude>**/exercises/**</exclude>
+                        <exclude>**/JDBCExecutor.java</exclude>
+                    </excludes>
                 </configuration>
             </plugin>
         </plugins>
