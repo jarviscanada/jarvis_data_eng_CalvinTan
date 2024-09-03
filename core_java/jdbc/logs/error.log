@@ -19,3 +19,24 @@ org.postgresql.util.PSQLException: ERROR: numeric field overflow
 2024-08-30 02:54:13 ERROR LoggerUtil:40 - ERROR: symbol not found [DSFA]
 2024-08-30 02:56:13 ERROR LoggerUtil:38 - ERROR: failed to establish connection to database
 2024-08-30 02:56:43 ERROR LoggerUtil:38 - ERROR: failed to establish connection to database
+2024-09-01 22:57:52 ERROR LoggerUtil:38 - ERROR: failed to establish connection to database
+2024-09-01 22:57:52 ERROR LoggerUtil:38 - ERROR: failed to establish connection to database
+2024-09-01 22:57:52 ERROR LoggerUtil:38 - ERROR: failed to establish connection to database
+2024-09-01 22:57:52 ERROR LoggerUtil:38 - ERROR: failed to establish connection to database
+2024-09-01 22:57:52 ERROR LoggerUtil:38 - ERROR: failed to establish connection to database
+2024-09-01 22:57:54 ERROR LoggerUtil:40 - ERROR: symbol not found [AAAAAA]
+2024-09-01 22:58:34 ERROR LoggerUtil:40 - ERROR: symbol not found [AAAAAA]
+2024-09-01 23:00:18 ERROR LoggerUtil:40 - ERROR: symbol not found [AAAAAA]
+2024-09-01 23:00:19 ERROR LoggerUtil:40 - ERROR: symbol not found [AAAAAA]
+2024-09-01 23:03:13 ERROR LoggerUtil:40 - ERROR: symbol not found [AAAAAA]
+2024-09-01 23:03:14 ERROR LoggerUtil:40 - ERROR: symbol not found [AAAAAA]
+2024-09-01 23:18:26 ERROR LoggerUtil:40 - ERROR: symbol not found [AAAAAA]
+2024-09-01 23:18:26 ERROR LoggerUtil:40 - ERROR: symbol not found [AAAAAA]
+2024-09-01 23:20:41 ERROR LoggerUtil:40 - ERROR: symbol not found [AAAAAA]
+2024-09-01 23:20:42 ERROR LoggerUtil:40 - ERROR: symbol not found [AAAAAA]
+2024-09-01 23:22:37 ERROR LoggerUtil:40 - ERROR: symbol not found [AAAAAA]
+2024-09-01 23:22:38 ERROR LoggerUtil:40 - ERROR: symbol not found [AAAAAA]
+2024-09-02 00:18:05 ERROR LoggerUtil:40 - ERROR: symbol not found [AAAAAA]
+2024-09-02 00:18:06 ERROR LoggerUtil:40 - ERROR: symbol not found [AAAAAA]
+2024-09-02 00:22:39 ERROR LoggerUtil:40 - ERROR: symbol not found [AAAAAA]
+2024-09-02 00:22:40 ERROR LoggerUtil:40 - ERROR: symbol not found [AAAAAA]
