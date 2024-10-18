@@ -1,0 +1,31 @@
+<table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="ticker">
+        <th mat-header-cell *matHeaderCellDef> Ticker </th>
+        <td mat-cell *matCellDef="let quote"> {{quote.ticker}} </td>
+    </ng-container>
+    <ng-container matColumnDef="lastPrice">
+        <th mat-header-cell *matHeaderCellDef> Last Price </th>
+        <td mat-cell *matCellDef="let quote"> {{quote.lastPrice}} </td>
+    </ng-container>
+    <ng-container matColumnDef="bidPrice">
+        <th mat-header-cell *matHeaderCellDef> Bid Price </th>
+        <td mat-cell *matCellDef="let quote"> {{quote.bidPrice}} </td>
+    </ng-container>
+    <ng-container matColumnDef="bidSize">
+        <th mat-header-cell *matHeaderCellDef> Bid Size </th>
+        <td mat-cell *matCellDef="let quote"> {{quote.bidSize}} </td>
+    </ng-container>
+    <ng-container matColumnDef="askPrice">
+        <th mat-header-cell *matHeaderCellDef> Ask Price </th>
+        <td mat-cell *matCellDef="let quote"> {{quote.askPrice}} </td>
+    </ng-container>
+    <ng-container matColumnDef="askSize">
+        <th mat-header-cell *matHeaderCellDef> Ask Size </th>
+        <td mat-cell *matCellDef="let quote"> {{quote.askPrice}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+
+      
+</table>

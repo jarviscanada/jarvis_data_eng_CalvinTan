@@ -1,4 +1,3 @@
-import { SafeHtml } from "@angular/platform-browser";
 
 export interface Trader {
     key: string;

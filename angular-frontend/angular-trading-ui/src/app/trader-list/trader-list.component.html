@@ -1,3 +1,4 @@
+<button mat-button (click)="addTrader()">Add Trader</button>
 <table mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="firstName">
         <th mat-header-cell *matHeaderCellDef> First Name </th>
@@ -26,6 +27,20 @@
                 <mat-icon>
                     <span class="material-icons">
                         delete
+                    </span>
+                </mat-icon>
+            </button>
+            <button mat-button [routerLink]="['/trader-account', trader.id]">
+                <mat-icon>
+                    <span class="material-icons">
+                        search
+                    </span>
+                </mat-icon>
+            </button>
+            <button mat-button (click)="editTrader(trader)">
+                <mat-icon>
+                    <span class="material-icons">
+                        edit
                     </span>
                 </mat-icon>
             </button>

@@ -1,0 +1,29 @@
+<h1>Edit Trader</h1>
+<form>
+    <mat-form-field floatLabel="always">
+        <mat-label>First Name</mat-label>
+        <input matInput type="text" [(ngModel)]="trader.firstName" name="firstname">
+    </mat-form-field>
+    <br>
+    <mat-form-field floatLabel="always">
+        <mat-label>Last Name</mat-label>
+        <input matInput type="text" [(ngModel)]="trader.lastName" name="lastName">
+    </mat-form-field>
+    <br>
+    <mat-form-field floatLabel="always">
+        <mat-label>Email</mat-label >
+        <input matInput type="email" [(ngModel)]="trader.email" name="email">
+    </mat-form-field>
+    <br>
+    <mat-form-field floatLabel="always">
+        <mat-label>Country</mat-label >
+        <input matInput type="text" [(ngModel)]="trader.country" name="country">
+    </mat-form-field>
+    <br>
+    <mat-form-field floatLabel="always">
+        <mat-label>Date of Birth</mat-label>
+        <input matInput type="text" [(ngModel)]="trader.dob" name="dateOfBirth">
+    </mat-form-field>
+</form>
+<button mat-button (click)="submit()">Submit</button>
+<button mat-button (click)="close()">Cancel</button>
