@@ -4,9 +4,9 @@ With an Honours degree in Computer Science from York University, I am equipped w
 
 ## Skills
 
-**Proficient:** Java, Python, NodeJS, RDBMS/SQL, Agile/Scrum
+**Proficient:** Java, Python, NodeJS, Angular, RDBMS/SQL, Agile/Scrum
 
-**Competent:** JavaScript, Docker, Socket.IO, Maven, Linux/Bash, Pandas, Express.js
+**Competent:** JavaScript, Typescript, Docker, Socket.IO, Maven, Linux/Bash, Pandas, Jupyter Notebook, Express.js
 
 **Familiar:** SpringBoot, React, Scikit-learn, C#, Unity
 
@@ -21,6 +21,10 @@ Project source code: [https://github.com/jarviscanada/jarvis_data_eng_CalvinTan]
       
   - JDBC App: Developed a Java app that mirrors the functionality provided by the grep command commonly found on Linux systems. Given a regex expression, the program recursively scans for files in a given directory and looks for matches in each file. By implementing the app using Streams, storing redundant data during intermediate operations is avoided resulting in highly optimized memory consumption. The app is also packaged with Maven and dockerized with Docker.
   - Grep App: Designed and implemented a Java Stock Quote application that allows users to simulate stock trading with real-time stock information. The app runs and receives commands from the command line. Utilizes an OkHttp client to pull up-to-date stock quotes from the Alpha Vantage API. Allows users to buy and sell stocks based on these quotes and stores their holdings in a PostgreSQL database. Utilizes JDBC with a PostgreSQL Driver to handle reads and writes between the program and the database. Implements DAO and Repository design patterns to enable highly maintainable code.
+
+**Python Data Analytics** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng_CalvinTan/tree/master/python_data_anlytics)]: Analyzed an online retailer's sales to data generate reports on user growth, revenue, etc. Identified different segments to target by creating and assigning RFM (Recency, Frequency, Monetary) values to each customer. Looked for ways to boost company growth by analyzing the generated reports. Tools used include python, Jupyter notebook, PostgreSQL, Docker.
+
+**Angular Trading App** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng_CalvinTan/tree/master/angular-frontend)]: Developed a front-end web application using Angular. Allows user to view the trading profiles of multiple traders in a list. New users can be added and existing traders can have their information updated. Trader data and stock quote data are pulled from a mock server running on NodeJS using a HttpClient. The program is containerized using Docker.
 
 
 ## Highlighted Projects

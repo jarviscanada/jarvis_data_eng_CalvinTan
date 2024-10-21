@@ -34,6 +34,16 @@
       ],
       "git_url": "/core_java",
       "name": "Core Java Apps"
+    },
+    {
+      "description": "Analyzed an online retailer's sales to data generate reports on user growth, revenue, etc. Identified different segments to target by creating and assigning RFM (Recency, Frequency, Monetary) values to each customer. Looked for ways to boost company growth by analyzing the generated reports. Tools used include python, Jupyter notebook, PostgreSQL, Docker.",
+      "git_url": "/python_data_anlytics",
+      "name": "Python Data Analytics"
+    },
+    {
+      "description": "Developed a front-end web application using Angular. Allows user to view the trading profiles of multiple traders in a list. New users can be added and existing traders can have their information updated. Trader data and stock quote data are pulled from a mock server running on NodeJS using a HttpClient. The program is containerized using Docker.",
+      "git_url": "/angular-frontend",
+      "name": "Angular Trading App"
     }
   ],
   "name": "Calvin Tan",
@@ -70,11 +80,13 @@
   "skills": {
     "competent": [
       "JavaScript",
+      "Typescript",
       "Docker",
       "Socket.IO",
       "Maven",
       "Linux/Bash",
       "Pandas",
+      "Jupyter Notebook",
       "Express.js"
     ],
     "familiar": [
@@ -88,6 +100,7 @@
       "Java",
       "Python",
       "NodeJS",
+      "Angular",
       "RDBMS/SQL",
       "Agile/Scrum"
     ]

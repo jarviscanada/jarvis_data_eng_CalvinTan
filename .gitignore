@@ -7,12 +7,3 @@ target/
 *.iml
 .idea/
 .eclipse
-core_java/grep/src/test/java/ca/jrvs/apps/Test.java
-/core_java/grep/out
-core_java/jdbc/src/main/java/ca/jrvs/apps/stockquote/JDBCExecutor.java
-core_java/jdbc/src/main/java/ca/jrvs/apps/jdbc/exercises/JDBCExecutor.java
-core_java/jdbc/src/main/java/ca/jrvs/apps/jdbc/exercises/JDBCExecutor.java
-/core_java/jdbc/logs
-/core_java/jdbc/logs
-core_java/jdbc/logs/info.log
-core_java/jdbc/logs/error.log
