@@ -1,0 +1,14 @@
+.mat-column-firstName {
+    flex: 0 0 50%;
+}
+
+.mat-column-Last Name {
+    flex: 0 0 50%;
+    color: red;
+}
+
+.mat-column-Email {
+    flex: 0 0 50%;
+    padding: 100;
+    color: green;
+}

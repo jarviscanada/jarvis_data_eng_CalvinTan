@@ -1,44 +1,27 @@
 # Introduction
+This project is a proof of concept utilizing data analytics techniques to analyze customer shopping behaviour of London Gift Shop (LGS).
+LGS is UK-based online store that has been selling giftware for over a decade. Their primary customers are wholesalers. 
+However, LGS has stopped seeing revenue growth in recent years, and does not have to resources to start a new data analysis project themselves. 
+As a result, Jarvis Consulting was given the task with the objective of finding avenues to attract new and existing customers through targeted marketing campaigns. 
+Retailed data was provided by the LGS IT team which was then loaded into a PostgreSQL database which acted as a data warehouse for the project. 
+Jupyter notebooks along with the pandas and numpy libraries were used to manipulate and analyze the data. 
+The analyzed data was plotted visually using matplotlib.
 
-London Gift Shop, a gift ware retailer, has not seen any revenue growth in the last view years. As
-such, they want to use modern data engineering techniques to determine ways of improving upon their
-revenue. However, since they lack the required infrastructure to perform this analysis themselves,
-they contacted the Jarvis group to utilize their services.
+# Implementaion
+## Project Architecture
+![](./architecture.png) <br>
+The London Gift Shop web application utilizes an Azure Resource Group containing an Azure SQL Server to store their live transaction data.
+Jarvis Consulting was provided a subset of the data from between 01/12/2009 - 09/12/2011 in the form of an sql file.  
+The data in the sql file is loaded into a PostgreSQL database which acts as a data warehouse, and the processing is performed in Jupyter notebook. 
 
-This project is a proof of concept for London Gift Shop, showcasing how data engineering techniques
-can be used to perform business analyses. As this is just a proof of concept, it was not possible to
-directly incorporate it into their development environment. Instead, the team at London Gift Shop
-compiled some sample data into an SQL file for the proof of concept to work with. The SQL file was
-loaded into a denormalized PSQL database, which acts as data warehouse for OLAP purposes. The
-analytics themselves were performed in a Jupyter notebook, using Python. Specifically, DataFrames
-from the Pandas library were used to manipulate the data, while matplotlib was used for plotting.
+## Data Analytics and Wrangling
+The prooft of concept data analysis can be found [here](./python_data_wrangling/retail_data_analytics_wrangling.ipynb) <br>
+Some initial key observations show that sales growth has indeed been relatively flat over the course of the time period analyzed, fluctuating between a high of 1.4% and a low of 0.4%. <br>
+When looking at the number of new users compared to existing users in during each month, we see that the number of new users drops off significantly. Marketing campaigns targeted towards attracting new customers is suggested to boost growth.<br>
+By performing RFM (Recency, Frequency, Monetary) Segmentation on customers, we are able to divide the customers into different categories to target in marketing campaigns. One segment of note is the "Can't Lose" segment which boasts a high frequency score but low recency score meaning they are no longer making as many purchases as they have in the past. This segment should be targeted as they can potentially become "Champions" if they return to our business. Another segment of note is the "Loyal Customers" segment which over make up a large percentage of customers. These customers consistently make purchases and it should be ensured that they remain loyal customers into the future. 
 
-# Project Architecture
-![Architecture Diagram](./.assets/architecture_diagram.png)
-
-London Gift Shop's web application consists of a Microsoft Azure resource group, using Azure's
-Content Delivery Network to handle the front-end stack, and Azure's API Management to handle the
-back-end. The back end itself is a microservice architecture, using a scalable AKS cluster for the
-actual processing, and a single SQL server for OLTP data. It is from this SQL server that the
-sample data used in the proof of concept was pulled. As mentioned above, the sample data was stored
-in a PSQL database separate from the Azure group, and the data analysis was performed in a Jupyter
-notebook.
-
-# Data Analytics and Wrangling
-The proof of concept showcasing the data analytics and wrangling can be found [here](./retail_data_analytics_wrangling.ipynb).
-Of particular note are the results of the RFM segmentation found at the bottom of the notebook. In
-particular, there are three segments which deserve attention. The "Can't Lose" segment contains
-customers who previously made large purchases, but have since stopped. In order to regain their
-patronage, a targeted campaign should be ran for them, making specific use of their previously
-purchased products, while also including new ones similar to them. The "Hibernating" segment is
-similar to the "Can't Lose" segment, in that it includes customers who purchased in the past, but
-were not major contributors to the revenue. A campaign similar to the one ran for the "Can't Lose"
-segment can be ran to entice them into becoming more frequent customers. Finally, the "Champions"
-segment contains repeat customers who are responsible for a large portion of the revenue. While not
-at as much of a risk of leaving as the "Can't Lose" segment, it would still be prudent to run a
-campaign for them to ensure they continue with their repeat patronage.
 
 # Improvements
-1. Look into other alternatives to RFM for measuring customer value
-2. Find a way to chart all the segment groups
-3. Investigate into more ways the different segments can be targeted to increase revenue
+1. Look at what types of purchases are commonly be made by different types of customers 
+2. Look for different ways to divide customers into segments 
+3. Look for data to help identify why the number of new customers has dropped over time
