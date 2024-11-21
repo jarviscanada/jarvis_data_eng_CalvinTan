@@ -1,0 +1,8 @@
+<p>{{ action }}</p>
+<mat-form-field>
+    <mat-label>Enter Amount</mat-label>
+    <input matInput [formControl]="valueFormControl" type="number">
+    <mat-error *ngIf="this.valueFormControl.hasError('required')">Invalid input</mat-error>
+</mat-form-field>
+<button mat-button (click)="submit()">Submit</button>
+<button mat-button (click)="close()">Cancel</button>

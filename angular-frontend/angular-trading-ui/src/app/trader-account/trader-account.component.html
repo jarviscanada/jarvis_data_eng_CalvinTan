@@ -1,0 +1,13 @@
+<p>trader-account works!</p>
+<ng-container *ngIf="trader">
+    <p>first name: {{trader.firstName}}</p>
+    <p>last name: {{trader.lastName}}</p>
+    <p>email: {{trader.email}}</p>
+    <p>country: {{trader.country}}</p>
+    <p>amount: {{trader.amount}}</p>
+    <button mat-button (click)="deposit()">Deposit</button>
+    <button mat-button (click)="withdraw()">Withdraw</button>
+</ng-container>
+<ng-container *ngIf="trader === undefined">
+    <p>Trader id: {{traderId}} not found</p>
+</ng-container>
