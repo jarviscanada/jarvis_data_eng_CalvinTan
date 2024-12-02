@@ -7,3 +7,4 @@ target/
 *.iml
 .idea/
 .eclipse
+spark/notebook/Spark Dataframe - WDI Data Analytics.json
