@@ -21,6 +21,7 @@ skills:
   competent:
     - JavaScript
     - Typescript
+    - React
     - Docker
     - Socket.IO
     - Maven
