@@ -6,7 +6,7 @@ With an Honours degree in Computer Science from York University, I am equipped w
 
 **Proficient:** Java, Python, NodeJS, Angular, RDBMS/SQL, Agile/Scrum
 
-**Competent:** JavaScript, Typescript, Docker, Socket.IO, Maven, Linux/Bash, Pandas, Jupyter Notebook, Express.js
+**Competent:** JavaScript, Typescript, React, Docker, Socket.IO, Maven, Linux/Bash, Pandas, Jupyter Notebook, Express.js
 
 **Familiar:** SpringBoot, React, Scikit-learn, C#, Unity
 
