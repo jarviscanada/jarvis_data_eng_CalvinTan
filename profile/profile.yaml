@@ -21,6 +21,8 @@ skills:
   competent:
     - JavaScript
     - Typescript
+    - PySparks
+    - Databricks
     - React
     - Docker
     - Socket.IO
@@ -62,9 +64,9 @@ jarvis_projects:
   # - name: "Hadoop"
   #   git_url: "/hadoop"
   #   description: ""
-  # - name: "Spark"
-  #   git_url: "/spark"
-  #   description: ""
+  - name: "Spark"
+    git_url: "/spark"
+    description: "Analyzed World Development Indicators and retail datasets using a Zeppelin notebook with Google Cloud Platform's Dataproc service and Azure Databricks respectively. Each solution utilizes PySpark to effectively and quickly process large volumes of distributed data. For the WDI dataset, information such as GDP for each country was found. For the retail dataset, important sales information such as total sales, sales growth, and new monthly users was analyzed to provide insights on how to grow the business."
   # - name: "Cloud/DevOps"
   #   git_url: "/cloud_devops"
   #   description: ""

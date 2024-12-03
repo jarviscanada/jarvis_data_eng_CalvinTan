@@ -6,7 +6,7 @@ With an Honours degree in Computer Science from York University, I am equipped w
 
 **Proficient:** Java, Python, NodeJS, Angular, RDBMS/SQL, Agile/Scrum
 
-**Competent:** JavaScript, Typescript, React, Docker, Socket.IO, Maven, Linux/Bash, Pandas, Jupyter Notebook, Express.js
+**Competent:** JavaScript, Typescript, PySparks, Databricks, React, Docker, Socket.IO, Maven, Linux/Bash, Pandas, Jupyter Notebook, Express.js
 
 **Familiar:** SpringBoot, React, Scikit-learn, C#, Unity
 
@@ -25,6 +25,8 @@ Project source code: [https://github.com/jarviscanada/jarvis_data_eng_CalvinTan]
 **Python Data Analytics** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng_CalvinTan/tree/master/python_data_anlytics)]: Analyzed an online retailer's sales to data generate reports on user growth, revenue, etc. Identified different segments to target by creating and assigning RFM (Recency, Frequency, Monetary) values to each customer. Looked for ways to boost company growth by analyzing the generated reports. Tools used include python, Jupyter notebook, PostgreSQL, Docker.
 
 **Angular Trading App** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng_CalvinTan/tree/master/angular-frontend)]: Developed a front-end web application using Angular. Allows user to view the trading profiles of multiple traders in a list. New users can be added and existing traders can have their information updated. Trader data and stock quote data are pulled from a mock server running on NodeJS using a HttpClient. The program is containerized using Docker.
+
+**Spark** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng_CalvinTan/tree/master/spark)]: Analyzed World Development Indicators and retail datasets using a Zeppelin notebook with Google Cloud Platform's Dataproc service and Azure Databricks respectively. Each solution utilizes PySpark to effectively and quickly process large volumes of distributed data. For the WDI dataset, information such as GDP for each country was found. For the retail dataset, important sales information such as total sales, sales growth, and new monthly users was analyzed to provide insights on how to grow the business.
 
 
 ## Highlighted Projects
