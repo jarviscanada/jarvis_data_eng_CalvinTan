@@ -44,6 +44,11 @@
       "description": "Developed a front-end web application using Angular. Allows user to view the trading profiles of multiple traders in a list. New users can be added and existing traders can have their information updated. Trader data and stock quote data are pulled from a mock server running on NodeJS using a HttpClient. The program is containerized using Docker.",
       "git_url": "/angular-frontend",
       "name": "Angular Trading App"
+    },
+    {
+      "description": "Analyzed World Development Indicators and retail datasets using a Zeppelin notebook with Google Cloud Platform's Dataproc service and Azure Databricks respectively. Each solution utilizes PySpark to effectively and quickly process large volumes of distributed data. For the WDI dataset, information such as GDP for each country was found. For the retail dataset, important sales information such as total sales, sales growth, and new monthly users was analyzed to provide insights on how to grow the business.",
+      "git_url": "/spark",
+      "name": "Spark"
     }
   ],
   "name": "Calvin Tan",
@@ -81,6 +86,8 @@
     "competent": [
       "JavaScript",
       "Typescript",
+      "PySparks",
+      "Databricks",
       "React",
       "Docker",
       "Socket.IO",
