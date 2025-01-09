@@ -1,14 +1,14 @@
 # Calvin Tan . Jarvis Consulting
 
-With an Honours degree in Computer Science from York University, I am equipped with a wide array of skills allowing me to excel in backend software development. Throughout my academic journey, I have worked on projects including a Java e-commerce program and machine learning on a Yelp dataset to gain crucial insights, developing my skills in Java, Python, and communication along the way. Through personal projects, I gained a deeper understanding of concepts and technologies such as multithreading and PowerShell. Demonstrating my proficiency in backend development, some of my personal projects include a port scanning application and a Windows system tray app that allows for quick access to power plan settings. Other technologies that I am familiar with include NodeJS, Python, React, and Maven. I am currently working at Jarvis where I am utilizing technologies including Docker, Java, SQL, and many more on a wide array of projects. My current position has also provided me with experience working under the Scrum/Agile framework. I believe my skill set allows me to excel in any development environment.
+With an Honours degree in Computer Science from York University, I bring a strong foundation in software development, with a growing emphasis on frontend technologies. My academic journey included diverse projects, such as creating a Java-based fullstack e-commerce application and leveraging machine learning on a Yelp dataset, which honed my skills in Python and Java. Beyond academics, I have delved into personal projects that expanded my understanding of software concepts, including frontend development with Angular and React. Some projects I have worked on include a real-time chatroom web app built using React for the frontend, and a combination of NodeJS and MongoDB for the backend. Another project is a stock portfolio manager built using Angular, which allows users to view and create/update/delete trader profiles. Currently, at Jarvis, I am applying technologies like Docker, Java, SQL, and React to a wide range of projects. This role has further strengthened my expertise in Scrum/Agile methodologies and collaborative development processes. My well-rounded skill set, with an increasing focus on frontend frameworks and user interface design, positions me to thrive in dynamic development environments.
 
 ## Skills
 
-**Proficient:** Java, Python, NodeJS, Angular, RDBMS/SQL, Agile/Scrum
+**Proficient:** Java, Python, Angular, NodeJS, RDBMS/SQL, Agile/Scrum
 
-**Competent:** JavaScript, Typescript, PySparks, Databricks, React, Docker, Socket.IO, Maven, Linux/Bash, Pandas, Jupyter Notebook, Express.js
+**Competent:** React, Express.js, JavaScript, Typescript, PySpark, Docker, Socket.IO, Maven, Linux/Bash, Pandas, Jupyter Notebook
 
-**Familiar:** SpringBoot, React, Scikit-learn, C#, Unity
+**Familiar:** SpringBoot, Scikit-learn, C#, Unity, Databricks
 
 ## Jarvis Projects
 
@@ -30,7 +30,7 @@ Project source code: [https://github.com/jarviscanada/jarvis_data_eng_CalvinTan]
 
 
 ## Highlighted Projects
-**Port Scanner**: Built a tool in Java that is capable of scanning for open ports from a given IP address. Utilizing Java's multithreading feature, up to 10,000 ports in parallel for highly optimized performance. Implements a REST API using Spring Boot to allow the tool to be accessed from any web browser.
+**Chat Web App**: Built a chat program written using the MERN stack. Uses MongoDB to store chat messages. Express and NodeJS and used for communication between the front-end chat program and the database on the back-end. Socket.IO used to handle realtime communications between users for the chat program
 
 **Windows Power Plan Tool**: Designed and implemented a system tray tool to allow users to easily swap between different power plans on a Windows device. The tool executes batch files to access the PC's power plan controls. A GUI built using Windows Forms allows users to see the current power plan at a glance and change it through the system tray icon.
 
