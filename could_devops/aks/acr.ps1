@@ -13,8 +13,12 @@ az aks update `
 --resource-group $RESOURCE_GROUP `
 --attach-acr $ACR_NAME
 
-cd springboot 
+#cd trading-app 
 az acr build `
 --image trading-app `
 --registry $ACR_NAME `
 --file Dockerfile .
+
+az acr repository list -n $ACR_NAME
+
+az acr list --query [].loginServer
